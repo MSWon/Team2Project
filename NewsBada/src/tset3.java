@@ -7,6 +7,8 @@ public class tset3 {
 		System.out.print("hello, hello");
 		
 		// ¡÷ºÆ
+		System.out.print("hello!!!");
+		
 	}
 
 }
