@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class NewAccount extends JFrame {
+public class SignupPage extends JFrame {
 
 	private JPanel contentPane;
 
@@ -16,7 +16,7 @@ public class NewAccount extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewAccount frame = new NewAccount();
+					SignupPage frame = new SignupPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,7 +28,7 @@ public class NewAccount extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewAccount() {
+	public SignupPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
