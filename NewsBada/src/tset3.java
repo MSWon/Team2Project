@@ -5,6 +5,8 @@ public class tset3 {
 		// TODO Auto-generated method stub
 		//dasdasda
 		System.out.print("hello, hello");
+		
+		// ¡÷ºÆ
 	}
 
 }
