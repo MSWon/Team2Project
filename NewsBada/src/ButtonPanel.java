@@ -30,7 +30,7 @@ import java.awt.Color;
 public class ButtonPanel extends JPanel implements ActionListener {
    
     // MySQL 연결
-    String url = "jdbc:mysql://localhost:3306/newschema";
+    String url = "jdbc:mysql://localhost:3306/newsbada";  //newsbada <- mysql에 있는 (내가 불러올) 스키마 이름
     String user = "root"; 
     String password = "1111";  // 자기꺼 비밀번호
     Connection myConn = null;
@@ -40,7 +40,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     String Title;
     String Imgurl;
     
-    private static final int IMG_WIDTH = 200;
+    private static final int IMG_WIDTH = 300;
     private static final int IMG_HEIGHT = 200;
     
     // 이미지 축소 method
@@ -57,6 +57,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     
    public ButtonPanel(String theme , int n) {
       setBackground(Color.WHITE);
+      
       
       try {
          // 1. Get connection
@@ -87,7 +88,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
       btnNewButton.setBackground(Color.WHITE);
       btnNewButton.setFont(new Font("돋움", Font.BOLD, 15));
       btnNewButton.addActionListener(this);
-      btnNewButton.setSize(IMG_WIDTH, IMG_HEIGHT);
+      btnNewButton.setSize(IMG_HEIGHT,IMG_WIDTH);
        btnNewButton.setHorizontalTextPosition(AbstractButton.CENTER);
        btnNewButton.setVerticalTextPosition(AbstractButton.BOTTOM);
 
@@ -109,7 +110,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             e.printStackTrace();
          }
 
-      this.setSize(IMG_WIDTH ,IMG_HEIGHT);
+      this.setSize(IMG_HEIGHT,IMG_WIDTH);
       GroupLayout groupLayout = new GroupLayout(this);
       groupLayout.setHorizontalGroup(
          groupLayout.createParallelGroup(Alignment.TRAILING)
