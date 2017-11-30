@@ -32,7 +32,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     // MySQL 연결
     String url = "jdbc:mysql://localhost:3306/newschema";
     String user = "root"; 
-    String password = "aodgml23125!";  // 자기꺼 비밀번호
+    String password = "1111";  // 자기꺼 비밀번호
     Connection myConn = null;
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
