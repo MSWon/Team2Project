@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Action;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class ButtonPanel extends JPanel implements ActionListener {
    
@@ -56,7 +57,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
     
    public ButtonPanel(String theme , int n) {
-      setBackground(Color.WHITE);
+      setBackground(Color.MAGENTA);
       
       
       try {
@@ -71,8 +72,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
          myStmt.setInt(2, n-1);
          
          // 4. Execute SQL query
-         ResultSet rs = myStmt.executeQuery();
-         if(rs.next()){
+         ResultSet rs = myStmt.executeQuery(); //명령해서 얻은 결과들
+         if(rs.next()){ ///////////////////// title과  이미지 url들을 불러와랏
             Title = rs.getString("Title");
             Imgurl = rs.getString("Imgurl");
          }
@@ -85,12 +86,12 @@ public class ButtonPanel extends JPanel implements ActionListener {
       }
       
       JButton btnNewButton = new JButton(Title);
+      btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+      btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
       btnNewButton.setBackground(Color.WHITE);
       btnNewButton.setFont(new Font("돋움", Font.BOLD, 15));
       btnNewButton.addActionListener(this);
-      btnNewButton.setSize(IMG_HEIGHT,IMG_WIDTH);
-       btnNewButton.setHorizontalTextPosition(AbstractButton.CENTER);
-       btnNewButton.setVerticalTextPosition(AbstractButton.BOTTOM);
+      btnNewButton.setSize(IMG_WIDTH,IMG_HEIGHT);
 
       
       String url = Imgurl;
@@ -110,20 +111,15 @@ public class ButtonPanel extends JPanel implements ActionListener {
             e.printStackTrace();
          }
 
-      this.setSize(IMG_HEIGHT,IMG_WIDTH);
+      this.setSize(302,187);
       GroupLayout groupLayout = new GroupLayout(this);
       groupLayout.setHorizontalGroup(
-         groupLayout.createParallelGroup(Alignment.TRAILING)
-            .addGroup(groupLayout.createSequentialGroup()
-               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-               .addGap(116))
+      	groupLayout.createParallelGroup(Alignment.LEADING)
+      		.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 302, Short.MAX_VALUE)
       );
       groupLayout.setVerticalGroup(
-         groupLayout.createParallelGroup(Alignment.TRAILING)
-            .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-               .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE))
+      	groupLayout.createParallelGroup(Alignment.LEADING)
+      		.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 187, Short.MAX_VALUE)
       );
       setLayout(groupLayout);
 

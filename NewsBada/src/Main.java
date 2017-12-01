@@ -14,6 +14,10 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -39,8 +43,10 @@ public class Main extends JFrame {
     * Create the frame.
     */
    public Main() {
+   	setResizable(false);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 1270, 743);
+      
+      setBounds(100, 100, 1416, 745);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
@@ -50,14 +56,28 @@ public class Main extends JFrame {
       JPanel panel_1 = new JPanel();
       
       JPanel panel_2 = new JPanel();
+     
       panel_2.setLayout(new GridLayout(2,3));
-      panel_2.setBorder(BorderFactory.createLineBorder(Color.BLACK));//
-      panel_2.add(new ButtonPanel("정치",3));
-      panel_2.add(new ButtonPanel("정치",3));
-      panel_2.add(new ButtonPanel("정치",3));
-      panel_2.add(new ButtonPanel("정치",3));
-      panel_2.add(new ButtonPanel("정치",3));
-      panel_2.add(new ButtonPanel("정치",3));
+      panel_2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+      ButtonPanel buttonPanel = new ButtonPanel("정치",3);
+      buttonPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      buttonPanel.setForeground(Color.BLACK);
+      panel_2.add(buttonPanel);
+      ButtonPanel buttonPanel_1 = new ButtonPanel("정치",3);
+      buttonPanel_1.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      panel_2.add(buttonPanel_1);
+      ButtonPanel buttonPanel_2 = new ButtonPanel("정치",3);
+      buttonPanel_2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      panel_2.add(buttonPanel_2);
+      ButtonPanel buttonPanel_3 = new ButtonPanel("정치",3);
+      buttonPanel_3.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      panel_2.add(buttonPanel_3);
+      ButtonPanel buttonPanel_4 = new ButtonPanel("정치",3);
+      buttonPanel_4.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      panel_2.add(buttonPanel_4);
+      ButtonPanel buttonPanel_5 = new ButtonPanel("정치",3);
+      buttonPanel_5.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+      panel_2.add(buttonPanel_5);
       GroupLayout gl_contentPane = new GroupLayout(contentPane);
       gl_contentPane.setHorizontalGroup(
       	gl_contentPane.createParallelGroup(Alignment.LEADING)
