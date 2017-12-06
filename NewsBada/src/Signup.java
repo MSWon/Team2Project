@@ -56,6 +56,7 @@ public class Signup extends JFrame implements ActionListener {
    Connection myConn = null;
    PreparedStatement myStmt = null;
    ResultSet myRs = null;
+   int result;
 
 
    public static boolean containsHangul(String str) {
@@ -227,38 +228,60 @@ public class Signup extends JFrame implements ActionListener {
          else if (radioButton.isSelected()) {
             sex = radioButton.getText();
          }
+         
          id = textField.getText();
          ps = String.valueOf(passwordField.getPassword());
          age = Integer.parseInt(textField_2.getText());
-
+         
          if (containsHangul(id) == true) {
-            JOptionPane.showMessageDialog(Signup.this, "아이디는 한글이 아닌 영문으로 입력해주세요.");
-         }
-
-         else {
-            try {
-               // 1. Get connection
-               myConn = DriverManager.getConnection(url, user, password);
-               // 2. Create a statement
-               myStmt = myConn.prepareStatement("insert into user (ID, Password, Sex, Age) values (?,?,?,?)");
-               // 3. Set the parameters
-               myStmt.setString(1, id);
-               myStmt.setString(2, ps);
-               myStmt.setString(3, sex);
-               myStmt.setInt(4, age);
+             JOptionPane.showMessageDialog(Signup.this, "아이디는 한글이 아닌 영문으로 입력해주세요.");
+          }
+         
+         else{
+         
+               try{
+                   // 1. Get connection
+                   myConn = DriverManager.getConnection(url, user, password);
+                   myStmt = myConn.prepareStatement("SELECT COUNT(ID) AS n FROM user WHERE ID=?");
+                   myStmt.setString(1, id);
+                   ResultSet rs = myStmt.executeQuery();
+                   if(rs.next()){
+                      result = rs.getInt("n");
+                   }
+               }
                
-               // 4. Execute SQL query
-               myStmt.executeUpdate();
-
-               System.out.println("Insert Done");
-
-            }
-
-            catch (Exception exc) {
-               exc.printStackTrace();
-            }
-         }
-      }
-
-   }
+               catch (Exception exc){
+                  exc.printStackTrace();
+               }
+               
+               if(result == 1){
+                  JOptionPane.showMessageDialog(Signup.this, "중복된 아이디입니다.");
+               }
+               
+               else{
+                     try {
+                        // 1. Get connection
+                        myConn = DriverManager.getConnection(url, user, password);
+                        // 2. Create a statement
+                        myStmt = myConn.prepareStatement("insert into user (ID, Password, Sex, Age) values (?,?,?,?)");
+                        // 3. Set the parameters
+                        myStmt.setString(1, id);
+                        myStmt.setString(2, ps);
+                        myStmt.setString(3, sex);
+                        myStmt.setInt(4, age);
+                        
+                        // 4. Execute SQL query
+                        myStmt.executeUpdate();
+         
+                        System.out.println("Insert Done");
+         
+                      }
+         
+                     catch (Exception exc) {
+                        exc.printStackTrace();
+                     }          
+                }
+             }
+        }
+    }
 }
