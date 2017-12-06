@@ -35,9 +35,9 @@ public class Signup extends JFrame implements ActionListener {
    private JPanel contentPane;
    private JTextField textField;
    //
-   String url = "jdbc:mysql://localhost:3306/newschema";
+   String url = "jdbc:mysql://localhost:3306/newsbada";
    String user = "root";
-   String password = "aodgml23125!";
+   String password = "1111";
    //
    String id;
    String ps;
@@ -240,7 +240,7 @@ public class Signup extends JFrame implements ActionListener {
                // 1. Get connection
                myConn = DriverManager.getConnection(url, user, password);
                // 2. Create a statement
-               myStmt = myConn.prepareStatement("insert into user (ID, password, sex, age) values (?,?,?,?)");
+               myStmt = myConn.prepareStatement("insert into user (ID, Password, Sex, Age) values (?,?,?,?)");
                // 3. Set the parameters
                myStmt.setString(1, id);
                myStmt.setString(2, ps);
