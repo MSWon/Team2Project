@@ -5,11 +5,9 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -86,22 +84,17 @@ public class ArticleViewPage {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setLocation(150, 100);
-		frame.setSize(800, 1000);
-		BorderLayout layout = new BorderLayout();
-		frame.setLayout(layout);
+		GridLayout gl = new GridLayout(2,1);
+		frame.setLayout(gl);
+		frame.setSize(800, 1200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnNewButton = new JButton();
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		// Image File insert here!
 		try {
 			String path = new String();
 			path = lm.ColumnImage;
-			System.out.println("여기"+path);
 			if (path != null) {
 				System.out.println(path);
 				URL image = new URL(path);
@@ -115,25 +108,24 @@ public class ArticleViewPage {
 			e.printStackTrace();
 		}
 		
-		btnNewButton.setSize(500, 500);
+		frame.getContentPane().add(btnNewButton);
+		
 		JPanel innerFrame = new JPanel();
 		GridLayout innerGl = new GridLayout(3,1);
 		innerFrame.setLayout(innerGl);
+		innerFrame.setSize(800, 600);
 		
-		innerFrame.setSize(800, 400);
-		innerFrame.setLocation(700, 100);
-		
-		
+		frame.getContentPane().add(innerFrame);
 		
 		// 뉴스 타이틀 삽입 부분
 		textTitle = new JTextField();
 		
 		//News Text insert here
-		try {
+		if (lm.ColumnTitle != null){
 			ColumnTitle = lm.ColumnTitle;
 			textTitle.setText(lm.ColumnTitle);
 		}
-		catch (Exception e) {
+		else {
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
 		innerFrame.add(textTitle);
@@ -143,27 +135,22 @@ public class ArticleViewPage {
 		textField = new JTextField();
 		
 		// News Title insert here
-		try {
+		if (lm.ColumnText != null){
 			ColumnText = lm.ColumnText;
 			textField.setText(lm.ColumnText);
 		}
-		catch (Exception e) {
+		else{
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
 		
 		innerFrame.add(textField);
 		textField.setColumns(10);
 		
-		setSize(800, 1200);
 		
 		// 추가 메뉴 삽입
 		
+		frame.pack();
 		frame.setVisible(true);
-		
-	}
-
-	private void setSize(int i, int j) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -174,18 +161,16 @@ class loadingMysql {
 	//static Statement stmt = null;
 	static Connection conn = null;
 	
-	static String ColumnTitle = new String();
-	static String ColumnURL = new String();
-	static String ColumnText = new String();
-	static String ColumnImage = new String();
+	public String ColumnTitle = new String();
+	public String ColumnURL = new String();
+	public String ColumnText = new String();
+	public String ColumnImage = new String();
 	
 	public loadingMysql (int i) throws Exception {
-	
-		
 		// 1.  드라이버 로드
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbcpractice","root","1111");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newsbada","root","1111");
 			System.out.println("DB Connection OK!");
 		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
@@ -210,10 +195,10 @@ class loadingMysql {
 					System.out.println("url: "+ColumnURL);
 					System.out.println("Text: "+ColumnText);
 					System.out.println("Imgurl: "+ColumnImage);
-				}
+					}
 			}
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

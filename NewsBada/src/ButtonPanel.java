@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,6 +29,8 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
+import com.mysql.jdbc.Blob;
+
 public class ButtonPanel extends JPanel implements ActionListener {
    
     // MySQL 연결
@@ -39,7 +42,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
     ResultSet myRs = null;
     
     String Title;
-    String Imgurl;
+    java.sql.Blob blob;
+    int bloblength;
+    byte[] bytes;
     
     private static final int IMG_WIDTH = 300;
     private static final int IMG_HEIGHT = 200;
@@ -65,17 +70,21 @@ public class ButtonPanel extends JPanel implements ActionListener {
          myConn = DriverManager.getConnection(url, user, password);
          // 2. Create a statement
 
-         myStmt = myConn.prepareStatement("SELECT Imgurl,Title FROM article WHERE Theme = ?"
+         myStmt = myConn.prepareStatement("SELECT A_img,A_title "
+         		+ "FROM url_info,article "
+         		+ "WHERE url_info.Url = article.Url AND article.Theme = ?"
                + "ORDER BY Date DESC LIMIT ?,1");
          // 3. Set the parameters
          myStmt.setString(1, theme);
-         myStmt.setInt(2, n-1);
-         
+         myStmt.setInt(2, n-1);      
          // 4. Execute SQL query
          ResultSet rs = myStmt.executeQuery(); //명령해서 얻은 결과들
-         if(rs.next()){ ///////////////////// title과  이미지 url들을 불러와랏
-            Title = rs.getString("Title");
-            Imgurl = rs.getString("Imgurl");
+         if(rs.next()){ ///////////////////// title과  이미지 blob들을 불러와랏
+            Title = rs.getString("A_title");
+            blob = rs.getBlob("A_img");
+            bloblength = (int)blob.length();
+            bytes = blob.getBytes(1, bloblength);
+            blob.free();
          }
          System.out.println("Done");
 
@@ -94,11 +103,10 @@ public class ButtonPanel extends JPanel implements ActionListener {
       btnNewButton.setSize(IMG_WIDTH,IMG_HEIGHT);
 
       
-      String url = Imgurl;
         BufferedImage img;
         BufferedImage newimg;
          try {
-            img = ImageIO.read(new URL(url));
+            img = ImageIO.read(new ByteArrayInputStream(bytes));
             int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
             newimg = resizeImage(img,type);
             ImageIcon pic = new ImageIcon(newimg);
