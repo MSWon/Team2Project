@@ -65,7 +65,7 @@ public class ArticleViewPage {
 	public ArticleViewPage(int columnID) {
 		
 		// 칼럼 번호 입력 하는 부분
-		this.ColumnID = columnID;
+		ArticleViewPage.ColumnID = columnID;
 		try {
 			loadingMysql lm = new loadingMysql(ColumnID);
 		} catch (Exception e) {
@@ -73,15 +73,14 @@ public class ArticleViewPage {
 			e.printStackTrace();
 		}
 		
-		
-		initialize();
+		initialize(lm);
 		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(loadingMysql lmclass) {
 		frame = new JFrame();
 		frame.setLocation(150, 100);
 		GridLayout gl = new GridLayout(2,1);
@@ -94,7 +93,7 @@ public class ArticleViewPage {
 		// Image File insert here!
 		try {
 			String path = new String();
-			path = lm.ColumnImage;
+			path = lmclass.ColumnImage;
 			if (path != null) {
 				System.out.println(path);
 				URL image = new URL(path);
@@ -158,18 +157,28 @@ public class ArticleViewPage {
 
 class loadingMysql {
 	
-	//static Statement stmt = null;
+	static Statement stmt = null;
 	static Connection conn = null;
 	
-	public String ColumnTitle = new String();
-	public String ColumnURL = new String();
-	public String ColumnText = new String();
-	public String ColumnImage = new String();
+	// article 테이블 정보 불러오기
+	public static String ColumnTitle = new String();
+	public static String ColumnTheme = new String();
+	public static String ColumnPname = new String();
+	public static String ColumnViews = new String();
+	public static String ColumnMale = new String();
+	public static String ColumnFemale = new String();
+
+	
+	// 
+	public static String ColumnURL = new String();
+	public static String ColumnText = new String();
+	public static String ColumnImage = new String();
 	
 	public loadingMysql (int i) throws Exception {
 		// 1.  드라이버 로드
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+			// 테이블 이름 수정 필요
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newsbada","root","1111");
 			System.out.println("DB Connection OK!");
 		} catch(ClassNotFoundException e) {
@@ -180,22 +189,30 @@ class loadingMysql {
 			System.out.println("DB Connection Error!");
 		}
 		
-		String sql = "select * from mytable";
+		
+		// article 테이블의 정보 불러오기
+		String sql = "select * from article";
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
 				if(rs.getInt("A_Number")==i){
-					ColumnTitle = rs.getString("Title");
-					ColumnText = rs.getString("text");
+					// article 테이블의 정보 불러오기
 					ColumnURL = rs.getString("Url");
-					ColumnImage = rs.getString("Imgurl");
-					System.out.println("title: "+ColumnTitle);
+					ColumnTheme = rs.getString("Theme");
+					ColumnPname = rs.getString("P_name");
+					ColumnViews = rs.getString("Views");
+					ColumnMale = rs.getString("Male");
+					ColumnFemale = rs.getString("Female");
+					
 					System.out.println("url: "+ColumnURL);
-					System.out.println("Text: "+ColumnText);
-					System.out.println("Imgurl: "+ColumnImage);
-					}
+					System.out.println("Theme: "+ColumnTheme);
+					System.out.println("P_name: "+ColumnPname);
+					System.out.println("Views: "+ColumnViews);
+					System.out.println("Male: "+ColumnMale);
+					System.out.println("Female: "+ColumnFemale);
+				}
 			}
 			
 		} catch (SQLException e) {
