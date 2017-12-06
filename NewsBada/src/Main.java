@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Main extends JFrame {
 
@@ -46,7 +47,7 @@ public class Main extends JFrame {
    	setResizable(false);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
-      setBounds(100, 100, 1416, 745);
+      setBounds(100, 100, 1800, 900);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
@@ -54,6 +55,7 @@ public class Main extends JFrame {
       JPanel panel = new JPanel();
       
       JPanel panel_1 = new JPanel();
+      panel_1.setLayout(new GridLayout(6,1));
       
       JPanel panel_2 = new JPanel();
      
@@ -80,22 +82,53 @@ public class Main extends JFrame {
       panel_2.add(buttonPanel_5);
       GroupLayout gl_contentPane = new GroupLayout(contentPane);
       gl_contentPane.setHorizontalGroup(
-      	gl_contentPane.createParallelGroup(Alignment.LEADING)
+      	gl_contentPane.createParallelGroup(Alignment.TRAILING)
       		.addGroup(gl_contentPane.createSequentialGroup()
-      			.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-      			.addPreferredGap(ComponentPlacement.UNRELATED)
-      			.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE))
-      		.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1242, Short.MAX_VALUE)
+      			.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+      			.addPreferredGap(ComponentPlacement.RELATED)
+      			.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 1531, GroupLayout.PREFERRED_SIZE))
+      		.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1784, Short.MAX_VALUE)
       );
       gl_contentPane.setVerticalGroup(
       	gl_contentPane.createParallelGroup(Alignment.TRAILING)
       		.addGroup(gl_contentPane.createSequentialGroup()
-      			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+      			.addComponent(panel, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
       			.addPreferredGap(ComponentPlacement.RELATED)
       			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-      				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
-      				.addComponent(panel_2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 545, Short.MAX_VALUE)))
+      				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)))
       );
+      
+      JButton btnNewButton = new JButton("\uC815\uCE58");
+      btnNewButton.setBackground(new Color(255, 250, 250));
+      btnNewButton.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton);
+      
+      JButton btnNewButton_1 = new JButton("\uC0AC\uD68C");
+      btnNewButton_1.setBackground(new Color(255, 250, 250));
+      btnNewButton_1.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton_1);
+      
+      JButton btnNewButton_2 = new JButton("\uACBD\uC81C");
+      btnNewButton_2.setBackground(new Color(255, 250, 250));
+      btnNewButton_2.setForeground(new Color(0, 0, 0));
+      btnNewButton_2.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton_2);
+      
+      JButton btnNewButton_3 = new JButton("IT");
+      btnNewButton_3.setBackground(new Color(255, 250, 250));
+      btnNewButton_3.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton_3);
+      
+      JButton btnNewButton_4 = new JButton("\uBB38\uD654");
+      btnNewButton_4.setBackground(new Color(255, 250, 250));
+      btnNewButton_4.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton_4);
+      
+      JButton btnNewButton_5 = new JButton("\uC5F0\uC608");
+      btnNewButton_5.setBackground(new Color(255, 250, 250));
+      btnNewButton_5.setFont(new Font("±¼¸²", Font.BOLD, 24));
+      panel_1.add(btnNewButton_5);
       contentPane.setLayout(gl_contentPane);
    }
 }
