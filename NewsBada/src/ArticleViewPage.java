@@ -158,10 +158,11 @@ public class ArticleViewPage {
 class loadingMysql {
 	
 	static Statement stmt = null;
+	static Statement stmt1 = null;
 	static Connection conn = null;
 	
 	// article 테이블 정보 불러오기
-	public static String ColumnTitle = new String();
+	public static String ColumnURL = new String();
 	public static String ColumnTheme = new String();
 	public static String ColumnPname = new String();
 	public static String ColumnViews = new String();
@@ -169,8 +170,9 @@ class loadingMysql {
 	public static String ColumnFemale = new String();
 
 	
-	// 
-	public static String ColumnURL = new String();
+	// url_info 테이블 정보 불러오기
+	public static String ColumnDate = new String();
+	public static String ColumnTitle = new String();
 	public static String ColumnText = new String();
 	public static String ColumnImage = new String();
 	
@@ -215,6 +217,31 @@ class loadingMysql {
 				}
 			}
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// article 테이블의 정보 불러오기
+		String sql2 = "select * from url_info where Url = '" + ColumnURL+"'";
+		try {
+			Statement stmt1 = conn.createStatement();
+			ResultSet rs1 = stmt1.executeQuery(sql2);
+			
+			while(rs1.next()){
+				// article 테이블의 정보 불러오기
+				ColumnDate = rs1.getString("Date");
+				ColumnTitle = rs1.getString("A_title");
+				ColumnText = rs1.getString("A_text");
+				ColumnImage = rs1.getString("A_img");
+					
+				System.out.println("P_name: "+ColumnDate);
+				System.out.println("Views: "+ColumnTitle);
+				System.out.println("Male: "+ColumnText);
+				System.out.println("Female: "+ColumnImage);
+				}
+			
+					
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
