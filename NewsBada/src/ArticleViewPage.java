@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +23,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.mysql.jdbc.Blob;
 
 public class ArticleViewPage {
 	
@@ -38,6 +42,8 @@ public class ArticleViewPage {
 	static String ColumnText = null;
 	static String ColumnTitle = null;
 	static String ColumnImgae = null;
+	
+	static Blob blob;
 	
 	/**
 	 * Launch the application.
@@ -81,19 +87,28 @@ public class ArticleViewPage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(loadingMysql lmclass) {
+		
 		frame = new JFrame();
-		frame.setLocation(150, 100);
-		GridLayout gl = new GridLayout(2,1);
-		frame.setLayout(gl);
-		frame.setSize(800, 1200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 1800, 900);
+		
+		panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5,5,5,5));
+		
+		frame.setContentPane(panel);
+		frame.setLocation(150, 100);
+		
+		GridLayout gl = new GridLayout(2,1);
+		panel.setLayout(gl);
+		panel.setSize(800, 1200);
+		
 		
 		JButton btnNewButton = new JButton();
 		
 		// Image File insert here!
 		try {
 			String path = new String();
-			path = lmclass.ColumnImage;
+			blob = lmclass.ColumnImage;
 			if (path != null) {
 				System.out.println(path);
 				URL image = new URL(path);
@@ -174,7 +189,7 @@ class loadingMysql {
 	public static String ColumnDate = new String();
 	public static String ColumnTitle = new String();
 	public static String ColumnText = new String();
-	public static String ColumnImage = new String();
+	public static Blob ColumnImage;
 	
 	public loadingMysql (int i) throws Exception {
 		// 1.  드라이버 로드
@@ -223,7 +238,7 @@ class loadingMysql {
 		}
 		
 		// article 테이블의 정보 불러오기
-		String sql2 = "select * from url_info where Url = '" + ColumnURL+"'";
+		String sql2 = "select * from url_info where Url='" +ColumnURL+"'";
 		try {
 			Statement stmt1 = conn.createStatement();
 			ResultSet rs1 = stmt1.executeQuery(sql2);
@@ -233,11 +248,21 @@ class loadingMysql {
 				ColumnDate = rs1.getString("Date");
 				ColumnTitle = rs1.getString("A_title");
 				ColumnText = rs1.getString("A_text");
-				ColumnImage = rs1.getString("A_img");
+				//ColumnImage = rs1.getString("A_img");
+				try{
+					ColumnImage = (Blob) rs1.getBlob("A_img");
+					int blobLength = (int) ColumnImage.length();  
+	
+					byte[] bytes = ColumnImage.getBytes(1, blobLength);
+					ColumnImage.free();
+					BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
+				} catch(Exception e){
+					e.getStackTrace();
+				}
 					
-				System.out.println("P_name: "+ColumnDate);
-				System.out.println("Views: "+ColumnTitle);
-				System.out.println("Male: "+ColumnText);
+				System.out.println("Date: "+ColumnDate);
+				System.out.println("A_title: "+ColumnTitle);
+				System.out.println("A_img: "+ColumnText);
 				System.out.println("Female: "+ColumnImage);
 				}
 			
