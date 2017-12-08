@@ -1,6 +1,7 @@
 
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -15,15 +16,21 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+
+
+
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener{
 
    private JPanel contentPane;
-
+   JPanel Btnpanel;
+   JButton first,prev,next,last;
+   CardLayout cl;
+   CardPanel cp;
    /**
     * Launch the application.
     */
@@ -44,6 +51,7 @@ public class Main extends JFrame {
     * Create the frame.
     */
    public Main() {
+	   
    	setResizable(false);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
@@ -57,29 +65,44 @@ public class Main extends JFrame {
       JPanel panel_1 = new JPanel();
       panel_1.setLayout(new GridLayout(6,1));
       
+      
       JPanel panel_2 = new JPanel();
-     
-      panel_2.setLayout(new GridLayout(2,3));
-      panel_2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-      ButtonPanel buttonPanel = new ButtonPanel("정치",3);
-      buttonPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      buttonPanel.setForeground(Color.BLACK);
-      panel_2.add(buttonPanel);
-      ButtonPanel buttonPanel_1 = new ButtonPanel("정치",3);
-      buttonPanel_1.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      panel_2.add(buttonPanel_1);
-      ButtonPanel buttonPanel_2 = new ButtonPanel("정치",3);
-      buttonPanel_2.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      panel_2.add(buttonPanel_2);
-      ButtonPanel buttonPanel_3 = new ButtonPanel("정치",3);
-      buttonPanel_3.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      panel_2.add(buttonPanel_3);
-      ButtonPanel buttonPanel_4 = new ButtonPanel("정치",3);
-      buttonPanel_4.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      panel_2.add(buttonPanel_4);
-      ButtonPanel buttonPanel_5 = new ButtonPanel("정치",3);
-      buttonPanel_5.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-      panel_2.add(buttonPanel_5);
+      panel_2.setLayout(new BoxLayout(panel_2,BoxLayout.Y_AXIS));
+      cp = new CardPanel("정치",6);
+
+      
+		Btnpanel = new JPanel(); // Button panel
+		
+		first = new JButton("  First");
+		first.setBackground(Color.WHITE);
+		first.setBorder(null);
+		first.addActionListener(this);
+		first.setFont(new Font("Gothic",Font.BOLD,25));
+		prev = new JButton("  Prev");
+		prev.addActionListener(this);
+		prev.setBackground(Color.WHITE);
+		prev.setBorder(null);
+		prev.setFont(new Font("Gothic",Font.BOLD,25));
+		next = new JButton("  Next");
+		next.addActionListener(this);
+		next.setBackground(Color.WHITE);
+		next.setBorder(null);
+		next.setFont(new Font("Gothic",Font.BOLD,25));
+		last = new JButton("  Last");
+		last.addActionListener(this);
+		last.setBackground(Color.WHITE);
+		last.setBorder(null);
+		last.setFont(new Font("Gothic",Font.BOLD,25));
+		
+		Btnpanel.add(first);
+		Btnpanel.add(prev);
+		Btnpanel.add(next);
+		Btnpanel.add(last);
+		Btnpanel.setBackground(Color.WHITE);
+		
+		panel_2.add(cp);
+		panel_2.add(Btnpanel);
+
       GroupLayout gl_contentPane = new GroupLayout(contentPane);
       gl_contentPane.setHorizontalGroup(
       	gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -131,4 +154,29 @@ public class Main extends JFrame {
       panel_1.add(btnNewButton_5);
       contentPane.setLayout(gl_contentPane);
    }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		JButton source = (JButton)e.getSource();
+		cl = (CardLayout) (cp.getLayout());
+		
+		if (e.getSource().equals(first)) {
+
+			cl.first(cp);
+
+		} else if (e.getSource().equals(prev)) {
+
+			cl.previous(cp);
+
+		} else if (e.getSource().equals(next)) {
+
+			cl.next(cp);
+
+		} else if (e.getSource().equals(last)) {
+
+			cl.last(cp);
+		}
+	
+}
 }
