@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,9 +22,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import com.mysql.jdbc.Blob;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class ArticleViewPage {
 	
@@ -42,8 +45,8 @@ public class ArticleViewPage {
 	static String ColumnText = null;
 	static String ColumnTitle = null;
 	static String ColumnImgae = null;
-	
-	static Blob blob;
+	private JLabel lblNewsbade;
+	private JTextField textField_1;
 	
 	/**
 	 * Launch the application.
@@ -86,32 +89,22 @@ public class ArticleViewPage {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize(loadingMysql lmclass) {
-		
 		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(100, 100, 1800, 900);
-		
-		panel = new JPanel();
-		panel.setBorder(new EmptyBorder(5,5,5,5));
-		
-		frame.setContentPane(panel);
 		frame.setLocation(150, 100);
-		
-		GridLayout gl = new GridLayout(2,1);
-		panel.setLayout(gl);
-		panel.setSize(800, 1200);
-		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnNewButton = new JButton();
 		
 		// Image File insert here!
+		/*
 		try {
 			String path = new String();
-			blob = lmclass.ColumnImage;
+			path = lmclass.ColumnImage;
 			if (path != null) {
 				System.out.println(path);
-				URL image = new URL(path);
+				//URL image = new URL(path);
 				BufferedImage img = ImageIO.read(image);
 				btnNewButton.setIcon(new ImageIcon(img));
 			}
@@ -121,53 +114,113 @@ public class ArticleViewPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		frame.getContentPane().add(btnNewButton);
-		
-		JPanel innerFrame = new JPanel();
-		GridLayout innerGl = new GridLayout(3,1);
-		innerFrame.setLayout(innerGl);
-		innerFrame.setSize(800, 600);
-		
-		frame.getContentPane().add(innerFrame);
-		
-		// 뉴스 타이틀 삽입 부분
-		textTitle = new JTextField();
-		
-		//News Text insert here
+		*/
+		//News Title insert here
 		if (lm.ColumnTitle != null){
 			ColumnTitle = lm.ColumnTitle;
-			textTitle.setText(lm.ColumnTitle);
+			//textTitle.setText(lm.ColumnTitle);
 		}
 		else {
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
-		innerFrame.add(textTitle);
-		textTitle.setColumns(10);
 		
-		// 뉴스 텍스트 삽입 부분
-		textField = new JTextField();
-		
-		// News Title insert here
+		// News Field insert here
 		if (lm.ColumnText != null){
 			ColumnText = lm.ColumnText;
-			textField.setText(lm.ColumnText);
+			//textField.setText(lm.ColumnText);
 		}
 		else{
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
 		
-		innerFrame.add(textField);
+		// 뉴스 타이틀 삽입 부분
+		textTitle = new JTextField();
+		textTitle.setColumns(10);
+		
+		// 뉴스 텍스트 삽입 부분
+		textField = new JTextField();
 		textField.setColumns(10);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 235, 205));
 		
+		// 버튼 연결 필요
+		JButton btnNewButton_1 = new JButton("\uB3CC\uC544\uAC00\uAE30");
+		
+		// 수정
+		JLabel lblMan = new JLabel("male");
+		
+		// 수정
+		JLabel lblFemale = new JLabel("female");
+		
+		// URL, 신문사, 날짜
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
+									.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblFemale, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 401, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(textField_1)
+										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+										.addComponent(textTitle, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))))))
+					.addGap(10))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(textTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(lblMan)
+							.addGap(10)
+							.addComponent(lblFemale))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(18)
+							.addComponent(btnNewButton_1)))
+					.addContainerGap())
+		);
+		
+		
+	
+		lblNewsbade = new JLabel("NewsBada");
+		lblNewsbade.setFont(new Font("인터파크고딕 M", Font.PLAIN, 27));
+		panel_1.add(lblNewsbade);
+		frame.getContentPane().setLayout(groupLayout);
+		
+		frame.setSize(1265, 379);
 		// 추가 메뉴 삽입
-		
 		frame.pack();
 		frame.setVisible(true);
 		
 	}
-
 }
 
 class loadingMysql {
@@ -189,7 +242,7 @@ class loadingMysql {
 	public static String ColumnDate = new String();
 	public static String ColumnTitle = new String();
 	public static String ColumnText = new String();
-	public static Blob ColumnImage;
+	public static String ColumnImage = new String();
 	
 	public loadingMysql (int i) throws Exception {
 		// 1.  드라이버 로드
@@ -238,7 +291,7 @@ class loadingMysql {
 		}
 		
 		// article 테이블의 정보 불러오기
-		String sql2 = "select * from url_info where Url='" +ColumnURL+"'";
+		String sql2 = "select * from url_info where Url = '" + ColumnURL+"'";
 		try {
 			Statement stmt1 = conn.createStatement();
 			ResultSet rs1 = stmt1.executeQuery(sql2);
@@ -248,21 +301,11 @@ class loadingMysql {
 				ColumnDate = rs1.getString("Date");
 				ColumnTitle = rs1.getString("A_title");
 				ColumnText = rs1.getString("A_text");
-				//ColumnImage = rs1.getString("A_img");
-				try{
-					ColumnImage = (Blob) rs1.getBlob("A_img");
-					int blobLength = (int) ColumnImage.length();  
-	
-					byte[] bytes = ColumnImage.getBytes(1, blobLength);
-					ColumnImage.free();
-					BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
-				} catch(Exception e){
-					e.getStackTrace();
-				}
+				ColumnImage = rs1.getString("A_img");
 					
-				System.out.println("Date: "+ColumnDate);
-				System.out.println("A_title: "+ColumnTitle);
-				System.out.println("A_img: "+ColumnText);
+				System.out.println("P_name: "+ColumnDate);
+				System.out.println("Views: "+ColumnTitle);
+				System.out.println("Male: "+ColumnText);
 				System.out.println("Female: "+ColumnImage);
 				}
 			
@@ -274,4 +317,5 @@ class loadingMysql {
 		
 	}
 }
+
 
