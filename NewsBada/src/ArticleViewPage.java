@@ -116,13 +116,7 @@ public class ArticleViewPage {
 		}
 		*/
 		//News Title insert here
-		if (lm.ColumnTitle != null){
-			ColumnTitle = lm.ColumnTitle;
-			//textTitle.setText(lm.ColumnTitle);
-		}
-		else {
-			textTitle.setText("값을 가져올 수 없습니다.");
-		}
+		
 		
 		// News Field insert here
 		if (lm.ColumnText != null){
@@ -136,6 +130,13 @@ public class ArticleViewPage {
 		// 뉴스 타이틀 삽입 부분
 		textTitle = new JTextField();
 		textTitle.setColumns(10);
+		if (lm.ColumnTitle != null){
+			ColumnTitle = lm.ColumnTitle;
+			textTitle.setText(lm.ColumnTitle);
+		}
+		else {
+			textTitle.setText("값을 가져올 수 없습니다.");
+		}
 		
 		// 뉴스 텍스트 삽입 부분
 		textField = new JTextField();
@@ -161,51 +162,45 @@ public class ArticleViewPage {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 1112, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
-									.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblFemale, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 401, Short.MAX_VALUE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(textField_1)
-										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-										.addComponent(textTitle, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))))))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblFemale, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textField_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+								.addComponent(textTitle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+								.addComponent(textField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))))
 					.addGap(10))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(textTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+							.addComponent(textTitle, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(10)
 							.addComponent(lblMan)
-							.addGap(10)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblFemale))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btnNewButton_1)))
-					.addContainerGap())
+							.addGap(10)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
+					.addGap(10))
 		);
 		
 		
@@ -215,7 +210,7 @@ public class ArticleViewPage {
 		panel_1.add(lblNewsbade);
 		frame.getContentPane().setLayout(groupLayout);
 		
-		frame.setSize(1265, 379);
+		
 		// 추가 메뉴 삽입
 		frame.pack();
 		frame.setVisible(true);
@@ -306,7 +301,7 @@ class loadingMysql {
 				System.out.println("P_name: "+ColumnDate);
 				System.out.println("Views: "+ColumnTitle);
 				System.out.println("Male: "+ColumnText);
-				System.out.println("Female: "+ColumnImage);
+				//System.out.println("Female: "+ColumnImage);
 				}
 			
 					
