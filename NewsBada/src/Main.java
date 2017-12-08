@@ -153,6 +153,7 @@ public class Main extends JFrame implements ActionListener{
       btnNewButton_5.setFont(new Font("±¼¸²", Font.BOLD, 24));
       panel_1.add(btnNewButton_5);
       contentPane.setLayout(gl_contentPane);
+      this.setVisible(true);
    }
 
 	@Override
