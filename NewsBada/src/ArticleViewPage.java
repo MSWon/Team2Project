@@ -100,7 +100,7 @@ public class ArticleViewPage {
 	private void initialize(loadingMysql lmclass) {
 		frame = new JFrame();
 		frame.setLocation(150, 100);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton btnNewButton = new JButton();
 		Article path;
@@ -157,10 +157,6 @@ public class ArticleViewPage {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 235, 205));
 		
-		
-		// 버튼 연결 필요
-		JButton btnNewButton_1 = new JButton("\uB3CC\uC544\uAC00\uAE30");
-		
 		// 수정
 		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
 		int a = 0;
@@ -190,8 +186,8 @@ public class ArticleViewPage {
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -210,8 +206,7 @@ public class ArticleViewPage {
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(textField_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
 										.addComponent(textTitle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-										.addComponent(textField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-										.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))))
+										.addComponent(textField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE))))
 							.addGap(10))))
 		);
 		groupLayout.setVerticalGroup(
@@ -228,12 +223,9 @@ public class ArticleViewPage {
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
 					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblFemale, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+					.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblFemale, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel))
 		);
