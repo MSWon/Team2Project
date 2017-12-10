@@ -1,10 +1,12 @@
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
@@ -17,6 +19,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class EmployeeSearchApp extends JFrame {
 
@@ -109,6 +117,27 @@ public class EmployeeSearchApp extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount()==2){
+					int row = table.getSelectedRow();
+					TableModel data = table.getModel();
+					String url = (String)data.getValueAt(row, 1); // 테이블 내에서 해당 row를 클릭했을때 해당 url 로 접속하도록 ! 
+					Desktop desktop = Desktop.getDesktop();
+					try {
+						desktop.browse(new URI(url));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (URISyntaxException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
 		scrollPane.setViewportView(table);
 		this.setVisible(true);
 	}
