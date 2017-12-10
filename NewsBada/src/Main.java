@@ -23,6 +23,11 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.SystemColor;
+import javax.swing.JLabel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class Main extends JFrame implements ActionListener{
 
@@ -51,6 +56,7 @@ public class Main extends JFrame implements ActionListener{
       setContentPane(contentPane);
       
       JPanel panel = new JPanel();
+      panel.setBackground(SystemColor.textHighlight);
       
       JPanel panel_1 = new JPanel();
       panel_1.setLayout(new GridLayout(6,1));
@@ -107,17 +113,25 @@ public class Main extends JFrame implements ActionListener{
       });
       btnNewButton_6.setBackground(Color.WHITE);
       btnNewButton_6.setFont(new Font("굴림", Font.BOLD, 17));
+      
+      JLabel lblNewLabel = new JLabel("NewsBada");
+      lblNewLabel.setForeground(new Color(255, 255, 255));
+      lblNewLabel.setFont(new Font("HY목각파임B", Font.BOLD, 55));
+      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
-      			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
-      			.addContainerGap(1539, Short.MAX_VALUE))
+      			.addGap(702)
+      			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE))
+      		.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
-      		.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-      			.addContainerGap(149, Short.MAX_VALUE)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addGap(49)
+      			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+      			.addGap(22)
       			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
       );
       panel.setLayout(gl_panel);

@@ -52,7 +52,7 @@ public class EmployeeDAO {
 
 		try {
 			A_title = '%'+A_title+'%';
-			myStmt = myConn.prepareStatement("select A_title,Url from url_info where A_title like ?");
+			myStmt = myConn.prepareStatement("select A_title,article.Url from url_info,article where url_info.Url=article.Url AND A_title like ? ORDER BY Views DESC");
 			
 			myStmt.setString(1, A_title);
 			
