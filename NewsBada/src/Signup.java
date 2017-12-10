@@ -282,6 +282,10 @@ public class Signup extends JFrame implements ActionListener {
                      }          
                 }
              }
+         //
+         this.dispose();
+         new login();
+         
         }
     }
 }

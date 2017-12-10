@@ -110,6 +110,29 @@ public class Main extends JFrame implements ActionListener{
       				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)))
       );
       
+      JButton btnNewButton_6 = new JButton("Search");
+      btnNewButton_6.addActionListener(new ActionListener() {
+      	public void actionPerformed(ActionEvent e) {
+      		new EmployeeSearchApp();
+      	}
+      });
+      btnNewButton_6.setBackground(Color.WHITE);
+      btnNewButton_6.setFont(new Font("±¼¸²", Font.BOLD, 17));
+      GroupLayout gl_panel = new GroupLayout(panel);
+      gl_panel.setHorizontalGroup(
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_panel.createSequentialGroup()
+      			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
+      			.addContainerGap(1539, Short.MAX_VALUE))
+      );
+      gl_panel.setVerticalGroup(
+      	gl_panel.createParallelGroup(Alignment.LEADING)
+      		.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+      			.addContainerGap(149, Short.MAX_VALUE)
+      			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+      );
+      panel.setLayout(gl_panel);
+      
       JButton btnNewButton = new JButton("\uC815\uCE58");
       btnNewButton.setBackground(new Color(255, 250, 250));
       btnNewButton.setFont(new Font("±¼¸²", Font.BOLD, 24));
