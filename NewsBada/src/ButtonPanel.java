@@ -43,6 +43,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     String password = "1111";  // ÀÚ±â²¨ ºñ¹Ð¹øÈ£
     Connection myConn = null;
     PreparedStatement myStmt = null;
+    PreparedStatement myStmt2 = null;
     ResultSet myRs = null;
     int Num;
     String Theme;
@@ -59,7 +60,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
       Num = n;
       Theme = theme;
       list = ImageDAO.returnImage(theme);
-
+      
 
       
       JButton btnNewButton = new JButton(list.get(n-1).getTitle());
@@ -106,8 +107,19 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	   } catch (Exception exc) {
 	         exc.printStackTrace();
 	   }
+
 	   System.out.println("µÆ´Ù.");
        new ArticleViewPage(Theme,Num);
+       
+	   try{
+	         myConn = DriverManager.getConnection(url, user, password);
+	         myStmt2 = myConn.prepareStatement("UPDATE newsbada.article SET Views=Views+1 WHERE A_Number=?");
+	         User u = new User();
+	         myStmt2.setInt(1,list.get(Num-1).getA_number());
+	         myStmt2.executeUpdate();
+	      }catch(Exception exc){
+	         exc.printStackTrace();
+	      }
       
    }
 

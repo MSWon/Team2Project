@@ -109,11 +109,11 @@ public class ArticleViewPage {
 			}
 		});
 		Article path;
-		int views = Integer.parseInt(lm.ColumnViews);
+
 		// Image File insert here!
 		
 		try {
-			path = new Article(lm.ColumnURL, lm.ColumnImage, views, lm.ColumnA_number);
+			path = new Article(lm.ColumnURL, lm.ColumnImage, lm.ColumnViews, lm.ColumnA_number);
 			
 			if (path != null) {
 				ImageIcon image = new ImageIcon(new ImageIcon(path.getImage()).getImage()
@@ -170,13 +170,13 @@ public class ArticleViewPage {
 		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
 		int a = 0;
 		int b = 0;
-		try{
-			a = (Integer.parseInt(lm.ColumnMale)*100 / sum);
-			b = (Integer.parseInt(lm.ColumnFemale)*100 / sum);
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
+//		try{
+//			a = (Integer.parseInt(lm.ColumnMale)*100 / sum);
+//			b = (Integer.parseInt(lm.ColumnFemale)*100 / sum);
+//		}
+//		catch (Exception e){
+//			e.printStackTrace();
+//		}
 		JLabel lblMan = new JLabel("male: "+a+"%");
 		lblMan.setFont(new Font("±¼¸²", Font.PLAIN, 20));
 		
@@ -276,7 +276,7 @@ class loadingMysql {
 	public static String ColumnURL = new String();
 	public static String ColumnTheme = new String();
 	public static String ColumnPname = new String();
-	public static String ColumnViews = new String();
+	public static int ColumnViews;
 	public static String ColumnMale = new String();
 	public static String ColumnFemale = new String();
 	public static int ColumnA_number;
@@ -303,7 +303,7 @@ class loadingMysql {
 					ColumnURL = rs.getString("Url");
 					ColumnTheme = rs.getString("Theme");
 					ColumnPname = rs.getString("P_name");
-					ColumnViews = rs.getString("Views");
+					ColumnViews = rs.getInt("Views");
 					ColumnMale = rs.getString("Male");
 					ColumnFemale = rs.getString("Female");
 					ColumnDate = rs.getString("Date");
