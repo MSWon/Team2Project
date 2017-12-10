@@ -96,7 +96,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	         // 2. Create a statement
 	         myStmt = myConn.prepareStatement("INSERT INTO read_on (`Time`, `ID`, `A_Number`) VALUES (?, ?, ?)");
 	         User u = new User();
-	         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms:ms").format(Calendar.getInstance().getTime());
+	         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 	         myStmt.setString(1, date);
 	         myStmt.setString(2, u.getId());
 	         myStmt.setInt(3, list.get(Num-1).getA_number());
@@ -107,7 +107,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	         exc.printStackTrace();
 	   }
 	   System.out.println("µÆ´Ù.");
-//    new ArticleViewPage(Theme,Num);
+       new ArticleViewPage(Theme,Num);
       
    }
 

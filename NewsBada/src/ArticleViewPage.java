@@ -41,10 +41,12 @@ import java.awt.GridBagConstraints;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 
+import com.mysql.jdbc.PreparedStatement;
+
 public class ArticleViewPage {
 	
 	private static int ColumnID; 
-	private static String ColumnTheme;
+	static String ColumnTheme;
 
 	private JFrame frame;
 	JPanel panel = new JPanel();
@@ -60,25 +62,7 @@ public class ArticleViewPage {
 	private JLabel lblNewsbade;
 	private JTextField textField_1;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// 칼럼 번호를 삽입해야 하는 부분
-					int id =28;
-					// 칼럼 번호 삽입해야하는 부분
-					ArticleViewPage window = new ArticleViewPage("정치",id);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
@@ -86,10 +70,9 @@ public class ArticleViewPage {
 	public ArticleViewPage(String theme, int columnID) {
 		
 		this.ColumnTheme = theme;
-		// 칼럼 번호 입력 하는 부분
-		ArticleViewPage.ColumnID = columnID;
+
 		try {
-			loadingMysql lm = new loadingMysql(ColumnID);
+			loadingMysql lm = new loadingMysql(columnID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,7 +113,7 @@ public class ArticleViewPage {
 		// Image File insert here!
 		
 		try {
-			path = new Article(lm.ColumnURL, lm.ColumnImage, views);
+			path = new Article(lm.ColumnURL, lm.ColumnImage, views, lm.ColumnA_number);
 			
 			if (path != null) {
 				ImageIcon image = new ImageIcon(new ImageIcon(path.getImage()).getImage()
@@ -286,9 +269,8 @@ public class ArticleViewPage {
 
 class loadingMysql {
 	
-	static Statement stmt = null;
-	static Statement stmt1 = null;
-	static Connection conn = null;
+	 java.sql.PreparedStatement stmt = null;
+     Connection conn = null;
 	
 	// article 테이블 정보 불러오기
 	public static String ColumnURL = new String();
@@ -297,7 +279,7 @@ class loadingMysql {
 	public static String ColumnViews = new String();
 	public static String ColumnMale = new String();
 	public static String ColumnFemale = new String();
-
+	public static int ColumnA_number;
 	
 	// url_info 테이블 정보 불러오기
 	public static String ColumnDate = new String();
@@ -305,30 +287,18 @@ class loadingMysql {
 	public static String ColumnText = new String();
 	public static byte[] ColumnImage;
 	
-	public loadingMysql (int i) throws Exception {
-		// 1.  드라이버 로드
+	public loadingMysql (int n) throws Exception {
+
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			// 테이블 이름 수정 필요
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newsbada","root","1111");
-			System.out.println("DB Connection OK!");
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("DB Driver Error!");
-		} catch(SQLException se) {
-			se.printStackTrace();
-			System.out.println("DB Connection Error!");
-		}
-		
-		
-		// article 테이블의 정보 불러오기
-		String sql = "select * from article ORDER BY Views DESC";
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			while(rs.next()){
-				if(rs.getInt("A_Number")==i){
+			String sql = "select article.Url,Theme,P_name,Views,Male,Female,Date,A_title,A_text,A_img,A_Number"
+					+ " from article,url_info where article.Url=url_info.Url "
+					+ "AND Theme = ? ORDER BY Views DESC LIMIT ?,1 ";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,ArticleViewPage.ColumnTheme);
+			stmt.setInt(2, n-1);
+			ResultSet rs = stmt.executeQuery();			
+			if(rs.next()){
 					// article 테이블의 정보 불러오기
 					ColumnURL = rs.getString("Url");
 					ColumnTheme = rs.getString("Theme");
@@ -336,41 +306,13 @@ class loadingMysql {
 					ColumnViews = rs.getString("Views");
 					ColumnMale = rs.getString("Male");
 					ColumnFemale = rs.getString("Female");
-					
-					System.out.println("url: "+ColumnURL);
-					System.out.println("Theme: "+ColumnTheme);
-					System.out.println("P_name: "+ColumnPname);
-					System.out.println("Views: "+ColumnViews);
-					System.out.println("Male: "+ColumnMale);
-					System.out.println("Female: "+ColumnFemale);
-				}
+					ColumnDate = rs.getString("Date");
+					ColumnTitle = rs.getString("A_title");
+					ColumnText = rs.getString("A_text");
+					ColumnImage = rs.getBytes("A_img");
+					ColumnA_number = rs.getInt("A_Number");			
 			}
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// article 테이블의 정보 불러오기
-		String sql2 = "select * from url_info where Url = '" + ColumnURL+"'";
-		try {
-			Statement stmt1 = conn.createStatement();
-			ResultSet rs1 = stmt1.executeQuery(sql2);
-			
-			while(rs1.next()){
-				// article 테이블의 정보 불러오기
-				ColumnDate = rs1.getString("Date");
-				ColumnTitle = rs1.getString("A_title");
-				ColumnText = rs1.getString("A_text");
-				ColumnImage = rs1.getBytes("A_img");
-					
-				System.out.println("P_name: "+ColumnDate);
-				System.out.println("Views: "+ColumnTitle);
-				System.out.println("text: "+ColumnText);
-				//System.out.println("Female: "+ColumnImage);
-				}
-			
-					
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
