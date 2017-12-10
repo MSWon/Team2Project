@@ -91,6 +91,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
    @Override
    public void actionPerformed(ActionEvent arg0) {
       
+	   int num;
+	   
 	   try {
 	         // 1. Get connection
 	         myConn = DriverManager.getConnection(url, user, password);
@@ -116,9 +118,10 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	      }catch(Exception exc){
 	         exc.printStackTrace();
 	      }
-
-	   System.out.println("µÆ´Ù.");
-       new ArticleViewPage(Theme,Num);
+	 
+	  
+	   num = list.get(Num).getA_number();
+       new ArticleViewPage(Theme,num);
        
       
    }

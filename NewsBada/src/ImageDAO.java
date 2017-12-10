@@ -25,7 +25,7 @@ public class ImageDAO {
 	         // 2. Create a statement
 	    
 	         myStmt = myConn.prepareStatement("SELECT article.Url,A_img,Theme,A_title,Views,A_Number,P_name,Male,Female,Date,A_text "
-	         		+ "FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Date DESC");
+	         		+ "FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Views DESC");
 	         
 	         myStmt.setString(1, theme);
 	         // 4. Execute SQL query

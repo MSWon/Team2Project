@@ -70,6 +70,14 @@ public class ArticleViewPage {
 	String ColumnText;
 	byte[] ColumnImage;
 	
+    // MySQL 연결
+    static String url = "jdbc:mysql://localhost:3306/newsbada";  //newsbada <- mysql에 있는 (내가 불러올) 스키마 이름
+    static String user = "root"; 
+    static String password = "1111";  // 자기꺼 비밀번호
+    
+	Connection myConn = null;
+	java.sql.PreparedStatement myStmt = null;
+	ResultSet rs = null;
 
 
 	/**
@@ -77,21 +85,39 @@ public class ArticleViewPage {
 	 */
 	public ArticleViewPage(String theme, int n) {
 		
-		ArrayList<Article> list;
-		ImageDAO dao = new ImageDAO();
-		list = dao.returnImage(theme);
-		// article 테이블의 정보 불러오기
-		ColumnURL = list.get(n).getUrl();
-		ColumnTheme = list.get(n).getTheme();
-		ColumnPname = list.get(n).getP_name();
-		ColumnViews = list.get(n).getView();
-		ColumnMale = list.get(n).getMale();
-		ColumnFemale =list.get(n).getFemale() ;
-		ColumnDate = list.get(n).getDate();
-		ColumnTitle =list.get(n).getTitle() ;
-		ColumnText = list.get(n).getText();
-		ColumnImage = list.get(n).getImage();
-		ColumnA_number = list.get(n).getA_number();	
+		
+		try {
+	         // 1. Get connection
+	         myConn = DriverManager.getConnection(url, user, password);
+	         // 2. Create a statement
+	    
+	         myStmt = myConn.prepareStatement("SELECT article.Url,A_img,Theme,A_title,Views,A_Number,P_name,Male,Female,Date,A_text "
+	         		+ "FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? AND A_Number = ? ORDER BY Views DESC");
+	         
+	         myStmt.setString(1, theme);
+	         myStmt.setInt(2, n);
+	         // 4. Execute SQL query
+	         ResultSet rs = myStmt.executeQuery();
+	
+	         if(rs.next()){
+
+	        	 ColumnURL = (rs.getString("Url"));
+	        	 ColumnImage = (rs.getBytes("A_img"));
+	        	 ColumnTheme  = (rs.getString("Theme"));
+	        	 ColumnTitle = (rs.getString("A_title"));
+	        	 ColumnViews = (rs.getInt("Views"));
+	        	 ColumnA_number  = (rs.getInt("A_Number"));
+	        	 ColumnPname  = (rs.getString("P_name"));
+	        	 ColumnMale = (rs.getInt("Male"));
+	        	 ColumnFemale = (rs.getInt("Female"));
+	        	 ColumnDate =  (rs.getString("Date"));
+	        	 ColumnText =  (rs.getString("A_text"));
+
+	         }	
+		   } catch (Exception exc) {
+		         exc.printStackTrace();
+	  	   }
+
 		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.text);
