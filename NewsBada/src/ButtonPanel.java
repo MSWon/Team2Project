@@ -43,6 +43,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
     int Num;
+    String Theme;
     String Title;
     
     private static final int IMG_WIDTH = 300;
@@ -54,6 +55,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
       
 	  setBackground(Color.MAGENTA);
       Num = n;
+      Theme = theme;
       list = ImageDAO.returnImage(theme);
 
 
@@ -86,7 +88,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
    @Override
    public void actionPerformed(ActionEvent arg0) {
       
-      new ArticleViewPage(Num);
+      new ArticleViewPage(Theme,Num);
       
    }
 

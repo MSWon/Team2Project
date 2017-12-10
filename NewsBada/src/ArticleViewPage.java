@@ -301,7 +301,7 @@ class loadingMysql {
 		
 		
 		// article 테이블의 정보 불러오기
-		String sql = "select * from article";
+		String sql = "select * from article ORDER BY Views DESC";
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
