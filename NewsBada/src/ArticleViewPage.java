@@ -38,6 +38,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class ArticleViewPage {
 	
@@ -103,6 +105,7 @@ public class ArticleViewPage {
 	@SuppressWarnings("deprecation")
 	private void initialize(loadingMysql lmclass) {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(SystemColor.text);
 		frame.setLocation(150, 100);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
@@ -148,6 +151,8 @@ public class ArticleViewPage {
 
 		// 뉴스 텍스트 삽입 부분
 		textField = new JTextArea();
+		textField.setBackground(UIManager.getColor("CheckBox.background"));
+		textField.setEditable(false);
 		textField.setLineWrap(true);
 		textField.setFont(new Font("굴림", Font.PLAIN, 20));
 		textField.setColumns(10);
@@ -163,6 +168,8 @@ public class ArticleViewPage {
 		
 		// 뉴스 타이틀 삽입 부분
 		textTitle = new JTextField();
+		textTitle.setBackground(UIManager.getColor("Button.light"));
+		textTitle.setEditable(false);
 		textTitle.setFont(new Font("굴림", Font.PLAIN, 24));
 		textTitle.setColumns(10);
 		if (lm.ColumnTitle != null){
@@ -174,7 +181,7 @@ public class ArticleViewPage {
 		}
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 235, 205));
+		panel_1.setBackground(SystemColor.textHighlight);
 		
 		// 수정
 		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
@@ -196,6 +203,8 @@ public class ArticleViewPage {
 		
 		// URL, 신문사, 날짜
 		textField_1 = new JTextField();
+		textField_1.setBackground(UIManager.getColor("Button.disabledShadow"));
+		textField_1.setEditable(false);
 		textField_1.setColumns(10);
 		textField_1.setText(lm.ColumnURL+"                    "+lm.ColumnPname+"                    "+lm.ColumnDate);
 		
@@ -258,7 +267,8 @@ public class ArticleViewPage {
 		
 	
 		lblNewsbade = new JLabel("NewsBada");
-		lblNewsbade.setFont(new Font("굴림", Font.PLAIN, 27));
+		lblNewsbade.setForeground(SystemColor.textHighlightText);
+		lblNewsbade.setFont(new Font("HY목각파임B", Font.BOLD, 30));
 		GridBagConstraints gbc_lblNewsbade = new GridBagConstraints();
 		gbc_lblNewsbade.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblNewsbade.gridx = 1;
