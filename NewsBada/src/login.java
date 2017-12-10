@@ -22,6 +22,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class login extends JFrame implements ActionListener{
 
@@ -42,6 +44,7 @@ public class login extends JFrame implements ActionListener{
    ResultSet rs = null;
    int result;
    static ArrayList<Article> list;
+   private JLabel lblNewLabel_1;
    
    /**
     * Launch the application.
@@ -74,6 +77,7 @@ public class login extends JFrame implements ActionListener{
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 641, 457);
       contentPane = new JPanel();
+      contentPane.setBackground(new Color(153, 204, 255));
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
       
@@ -92,37 +96,44 @@ public class login extends JFrame implements ActionListener{
       passwordField.setFont(new Font("±¼¸²", Font.PLAIN, 25));
       
       button_signin = new JButton("\uB85C\uADF8\uC778");
+      button_signin.setBackground(new Color(255, 255, 255));
       button_signin.addActionListener(this);
       button_signin.setFont(new Font("±¼¸²", Font.BOLD, 25));
       
       button_signup = new JButton("\uD68C\uC6D0\uAC00\uC785");
+      button_signup.setBackground(new Color(255, 255, 255));
       button_signup.addActionListener(this);
       button_signup.setFont(new Font("±¼¸²", Font.BOLD, 25));
+      
+      lblNewLabel_1 = new JLabel(" NewsBada");
+      lblNewLabel_1.setFont(new Font("ÈÞ¸Õ¿¾Ã¼", Font.BOLD, 17));
+      lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
       
       GroupLayout gl_contentPane = new GroupLayout(contentPane);
       gl_contentPane.setHorizontalGroup(
       	gl_contentPane.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_contentPane.createSequentialGroup()
-      			.addGap(131)
-      			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-      				.addComponent(button_signin, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      				.addComponent(label, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-      				.addComponent(lblNewLabel))
       			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
       				.addGroup(gl_contentPane.createSequentialGroup()
+      					.addGap(131)
+      					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+      						.addComponent(button_signin, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      						.addComponent(label, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      						.addComponent(lblNewLabel))
       					.addPreferredGap(ComponentPlacement.UNRELATED)
-      					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-      						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-      						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-      				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-      					.addGap(99)
-      					.addComponent(button_signup)))
-      			.addContainerGap(124, Short.MAX_VALUE))
+      					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+      						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+      							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+      							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+      						.addComponent(button_signup)))
+      				.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+      			.addContainerGap(166, Short.MAX_VALUE))
       );
       gl_contentPane.setVerticalGroup(
       	gl_contentPane.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_contentPane.createSequentialGroup()
-      			.addGap(110)
+      			.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+      			.addGap(76)
       			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
       				.addComponent(lblNewLabel)
       				.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -134,7 +145,7 @@ public class login extends JFrame implements ActionListener{
       			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
       				.addComponent(button_signin)
       				.addComponent(button_signup, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-      			.addContainerGap(108, Short.MAX_VALUE))
+      			.addContainerGap(103, Short.MAX_VALUE))
       );
       contentPane.setLayout(gl_contentPane);
       this.setVisible(true);
