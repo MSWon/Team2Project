@@ -38,7 +38,7 @@ public class Main extends JFrame implements ActionListener{
    CardLayout cl;
    CardPanel cp;
    String Theme;
-   int k= 1;
+   int k= 0;
    /**
 
    /**
@@ -46,8 +46,8 @@ public class Main extends JFrame implements ActionListener{
     */
    public Main(String theme) {
 	  
-	   Theme = theme;
-   	setResizable(false);
+	  Theme = theme;
+   	  setResizable(false);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
       setBounds(100, 100, 1800, 900);
@@ -64,7 +64,7 @@ public class Main extends JFrame implements ActionListener{
       
       JPanel panel_2 = new JPanel();
       panel_2.setLayout(new BoxLayout(panel_2,BoxLayout.Y_AXIS));
-      cp = new CardPanel(theme,1);
+      cp = new CardPanel(theme,0);
       
 		Btnpanel = new JPanel(); // Button panel
 

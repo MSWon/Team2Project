@@ -17,20 +17,34 @@ public class ImageDAO {
 	static PreparedStatement myStmt = null;
 	ResultSet rs = null;
 	
-	public static ArrayList<Article> returnImage(String theme){
+	public ArrayList<Article> returnImage(String theme){
 		ArrayList<Article> list = new ArrayList<Article>();
 		try {
 	         // 1. Get connection
 	         myConn = DriverManager.getConnection(url, user, password);
 	         // 2. Create a statement
-	         myStmt = myConn.prepareStatement("SELECT A_img,A_title,Views,A_Number FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Views DESC");
+	    
+	         myStmt = myConn.prepareStatement("SELECT article.Url,A_img,Theme,A_title,Views,A_Number,P_name,Male,Female,Date,A_text "
+	         		+ "FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Date DESC");
 	         
 	         myStmt.setString(1, theme);
 	         // 4. Execute SQL query
 	         ResultSet rs = myStmt.executeQuery();
 	         Article AI;
 	         while(rs.next()){
-	        	 AI = new Article(rs.getString("A_title"),rs.getBytes("A_img"),rs.getInt("Views"),rs.getInt("A_Number"));
+	        	 AI = new Article();
+	        	 AI.setUrl(rs.getString("Url"));
+	        	 AI.setImage(rs.getBytes("A_img"));
+	        	 AI.setTheme(rs.getString("Theme"));
+	        	 AI.setTitle(rs.getString("A_title"));
+	        	 AI.setView(rs.getInt("Views"));
+	        	 AI.setA_number(rs.getInt("A_Number"));
+	        	 AI.setP_name(rs.getString("P_name"));
+	        	 AI.setMale(rs.getInt("Male"));
+	        	 AI.setFemale(rs.getInt("Female"));
+	        	 AI.setDate(rs.getString("Date"));
+	        	 AI.setText(rs.getString("A_text"));
+	        
 	        	 list.add(AI);
 	         }
 	         rs.close();

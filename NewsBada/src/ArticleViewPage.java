@@ -25,6 +25,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
@@ -44,9 +45,6 @@ import javax.swing.UIManager;
 import com.mysql.jdbc.PreparedStatement;
 
 public class ArticleViewPage {
-	
-	private static int ColumnID; 
-	static String ColumnTheme;
 
 	private JFrame frame;
 	JPanel panel = new JPanel();
@@ -54,39 +52,47 @@ public class ArticleViewPage {
 	private JTextField textTitle;  // 뉴스타이틀
 	private JTextField text;  // 추가메뉴
 
-	static loadingMysql lm;
-	
-	static String ColumnText = null;
-	static String ColumnTitle = null;
-	static String ColumnImgae = null;
 	private JLabel lblNewsbade;
 	private JTextField textField_1;
+	
+	// article 테이블 정보 불러오기
+	String ColumnURL;
+	String ColumnTheme;
+	String ColumnPname;
+	static int ColumnViews;
+	static int ColumnMale ;
+	static int ColumnFemale;
+	int ColumnA_number;
+	
+	// url_info 테이블 정보 불러오기
+	String ColumnDate;
+	String ColumnTitle;
+	String ColumnText;
+	byte[] ColumnImage;
 	
 
 
 	/**
 	 * Create the application.
 	 */
-	public ArticleViewPage(String theme, int columnID) {
+	public ArticleViewPage(String theme, int n) {
 		
-		this.ColumnTheme = theme;
-
-		try {
-			loadingMysql lm = new loadingMysql(columnID);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<Article> list;
+		ImageDAO dao = new ImageDAO();
+		list = dao.returnImage(theme);
+		// article 테이블의 정보 불러오기
+		ColumnURL = list.get(n).getUrl();
+		ColumnTheme = list.get(n).getTheme();
+		ColumnPname = list.get(n).getP_name();
+		ColumnViews = list.get(n).getView();
+		ColumnMale = list.get(n).getMale();
+		ColumnFemale =list.get(n).getFemale() ;
+		ColumnDate = list.get(n).getDate();
+		ColumnTitle =list.get(n).getTitle() ;
+		ColumnText = list.get(n).getText();
+		ColumnImage = list.get(n).getImage();
+		ColumnA_number = list.get(n).getA_number();	
 		
-		initialize(lm);
-		
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	@SuppressWarnings("deprecation")
-	private void initialize(loadingMysql lmclass) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.text);
 		frame.setLocation(150, 100);
@@ -98,7 +104,7 @@ public class ArticleViewPage {
 				
 				Desktop desktop = Desktop.getDesktop();
 				try {
-					desktop.browse(new URI(lm.ColumnURL));
+					desktop.browse(new URI(ColumnURL));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -108,30 +114,20 @@ public class ArticleViewPage {
 				}
 			}
 		});
-		Article path;
-
+		
 		// Image File insert here!
 		
 		try {
-			path = new Article(lm.ColumnURL, lm.ColumnImage, lm.ColumnViews, lm.ColumnA_number);
 			
-			if (path != null) {
-				ImageIcon image = new ImageIcon(new ImageIcon(path.getImage()).getImage()
+				ImageIcon image = new ImageIcon(new ImageIcon(ColumnImage).getImage()
 						.getScaledInstance(400, 300, Image.SCALE_SMOOTH));
 				btnNewButton.setIcon(image);
-				
-				
-			}
-			else btnNewButton.setIcon(new ImageIcon());
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//News Title insert here
-		
-
 		// 뉴스 텍스트 삽입 부분
 		textField = new JTextArea();
 		textField.setBackground(UIManager.getColor("CheckBox.background"));
@@ -139,35 +135,33 @@ public class ArticleViewPage {
 		textField.setLineWrap(true);
 		textField.setFont(new Font("굴림", Font.PLAIN, 20));
 		textField.setColumns(10);
-		
+			
 		// News Field insert here
-		if (lm.ColumnText != null){
-			ColumnText = lm.ColumnText;
-			textField.setText(lm.ColumnText);
+		if (ColumnText != null){
+
+			textField.setText(ColumnText);
 		}
 		else{
 			textField.setText("값을 가져올 수 없습니다.");
 		}
-		
+
 		// 뉴스 타이틀 삽입 부분
 		textTitle = new JTextField();
 		textTitle.setBackground(UIManager.getColor("Button.light"));
 		textTitle.setEditable(false);
 		textTitle.setFont(new Font("굴림", Font.PLAIN, 24));
 		textTitle.setColumns(10);
-		if (lm.ColumnTitle != null){
-			ColumnTitle = lm.ColumnTitle;
-			textTitle.setText(lm.ColumnTitle);
+		if (ColumnTitle != null){
+			textTitle.setText(ColumnTitle);
 		}
 		else {
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.textHighlight);
 		
-		// 수정
-		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
+//		// 수정
+//		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
 		int a = 0;
 		int b = 0;
 //		try{
@@ -189,11 +183,11 @@ public class ArticleViewPage {
 		textField_1.setBackground(UIManager.getColor("Button.disabledShadow"));
 		textField_1.setEditable(false);
 		textField_1.setColumns(10);
-		textField_1.setText(lm.ColumnURL+"                    "+lm.ColumnPname+"                    "+lm.ColumnDate);
+		textField_1.setText(ColumnURL+"                    "+ColumnPname+"                    "+ColumnDate);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		lblNewLabel.setText("Views: "+lm.ColumnViews);
+		lblNewLabel.setText("Views: "+ ColumnViews);
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -267,58 +261,8 @@ public class ArticleViewPage {
 	}
 }
 
-class loadingMysql {
-	
-	 java.sql.PreparedStatement stmt = null;
-     Connection conn = null;
-	
-	// article 테이블 정보 불러오기
-	public static String ColumnURL = new String();
-	public static String ColumnTheme = new String();
-	public static String ColumnPname = new String();
-	public static int ColumnViews;
-	public static String ColumnMale = new String();
-	public static String ColumnFemale = new String();
-	public static int ColumnA_number;
-	
-	// url_info 테이블 정보 불러오기
-	public static String ColumnDate = new String();
-	public static String ColumnTitle = new String();
-	public static String ColumnText = new String();
-	public static byte[] ColumnImage;
-	
-	public loadingMysql (int n) throws Exception {
 
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newsbada","root","1111");
-			String sql = "select article.Url,Theme,P_name,Views,Male,Female,Date,A_title,A_text,A_img,A_Number"
-					+ " from article,url_info where article.Url=url_info.Url "
-					+ "AND Theme = ? ORDER BY Views DESC LIMIT ?,1 ";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1,ArticleViewPage.ColumnTheme);
-			stmt.setInt(2, n-1);
-			ResultSet rs = stmt.executeQuery();			
-			if(rs.next()){
-					// article 테이블의 정보 불러오기
-					ColumnURL = rs.getString("Url");
-					ColumnTheme = rs.getString("Theme");
-					ColumnPname = rs.getString("P_name");
-					ColumnViews = rs.getInt("Views");
-					ColumnMale = rs.getString("Male");
-					ColumnFemale = rs.getString("Female");
-					ColumnDate = rs.getString("Date");
-					ColumnTitle = rs.getString("A_title");
-					ColumnText = rs.getString("A_text");
-					ColumnImage = rs.getBytes("A_img");
-					ColumnA_number = rs.getInt("A_Number");			
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-}
+	
+
 
 

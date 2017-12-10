@@ -59,11 +59,11 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	  setBackground(Color.MAGENTA);
       Num = n;
       Theme = theme;
-      list = ImageDAO.returnImage(theme);
+      ImageDAO dao = new ImageDAO();
+      list = dao.returnImage(theme);
       
-
       
-      JButton btnNewButton = new JButton(list.get(n-1).getTitle());
+      JButton btnNewButton = new JButton(list.get(n).getTitle());
       btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
       btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
       btnNewButton.setBackground(Color.WHITE);
@@ -71,7 +71,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
       btnNewButton.addActionListener(this);
       btnNewButton.setSize(IMG_WIDTH,IMG_HEIGHT);
 
-	  ImageIcon image = new ImageIcon(new ImageIcon(list.get(n-1).getImage()).getImage()
+	  ImageIcon image = new ImageIcon(new ImageIcon(list.get(n).getImage()).getImage()
 				.getScaledInstance(IMG_WIDTH, IMG_HEIGHT, Image.SCALE_SMOOTH));
 	  btnNewButton.setIcon(image);
       this.setSize(302,187);
@@ -100,26 +100,26 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 	         myStmt.setString(1, date);
 	         myStmt.setString(2, u.getId());
-	         myStmt.setInt(3, list.get(Num-1).getA_number());
+	         myStmt.setInt(3, list.get(Num).getA_number());
 	         // 4. Execute SQL query
 	         myStmt.executeUpdate();
 	         
 	   } catch (Exception exc) {
 	         exc.printStackTrace();
 	   }
-
-	   System.out.println("µÆ´Ù.");
-       new ArticleViewPage(Theme,Num);
-       
 	   try{
 	         myConn = DriverManager.getConnection(url, user, password);
 	         myStmt2 = myConn.prepareStatement("UPDATE newsbada.article SET Views=Views+1 WHERE A_Number=?");
 	         User u = new User();
-	         myStmt2.setInt(1,list.get(Num-1).getA_number());
+	         myStmt2.setInt(1,list.get(Num).getA_number());
 	         myStmt2.executeUpdate();
 	      }catch(Exception exc){
 	         exc.printStackTrace();
 	      }
+
+	   System.out.println("µÆ´Ù.");
+       new ArticleViewPage(Theme,Num);
+       
       
    }
 
