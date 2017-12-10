@@ -1,9 +1,12 @@
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -29,6 +32,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 public class ArticleViewPage {
 	
@@ -36,7 +41,7 @@ public class ArticleViewPage {
 
 	private JFrame frame;
 	JPanel panel = new JPanel();
-	private JTextField textField;  // 뉴스텍스트
+	private JTextArea textField;  // 뉴스텍스트
 	private JTextField textTitle;  // 뉴스타이틀
 	private JTextField text;  // 추가메뉴
 
@@ -96,17 +101,18 @@ public class ArticleViewPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnNewButton = new JButton();
-		
+		ArticleImage path;
 		// Image File insert here!
-		/*
+		
 		try {
-			String path = new String();
-			path = lmclass.ColumnImage;
+			path = new ArticleImage(lm.ColumnURL, lm.ColumnImage);
+			
 			if (path != null) {
-				System.out.println(path);
-				//URL image = new URL(path);
-				BufferedImage img = ImageIO.read(image);
-				btnNewButton.setIcon(new ImageIcon(img));
+				ImageIcon image = new ImageIcon(new ImageIcon(path.getImage()).getImage()
+						.getScaledInstance(400, 300, Image.SCALE_SMOOTH));
+				btnNewButton.setIcon(image);
+				
+				
 			}
 			else btnNewButton.setIcon(new ImageIcon());
 
@@ -114,21 +120,28 @@ public class ArticleViewPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		//News Title insert here
 		
+
+		// 뉴스 텍스트 삽입 부분
+		textField = new JTextArea();
+		textField.setLineWrap(true);
+		textField.setFont(new Font("굴림", Font.PLAIN, 20));
+		textField.setColumns(10);
 		
 		// News Field insert here
 		if (lm.ColumnText != null){
 			ColumnText = lm.ColumnText;
-			//textField.setText(lm.ColumnText);
+			textField.setText(lm.ColumnText);
 		}
 		else{
-			textTitle.setText("값을 가져올 수 없습니다.");
+			textField.setText("값을 가져올 수 없습니다.");
 		}
 		
 		// 뉴스 타이틀 삽입 부분
 		textTitle = new JTextField();
+		textTitle.setFont(new Font("굴림", Font.PLAIN, 24));
 		textTitle.setColumns(10);
 		if (lm.ColumnTitle != null){
 			ColumnTitle = lm.ColumnTitle;
@@ -138,45 +151,65 @@ public class ArticleViewPage {
 			textTitle.setText("값을 가져올 수 없습니다.");
 		}
 		
-		// 뉴스 텍스트 삽입 부분
-		textField = new JTextField();
-		textField.setColumns(10);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 235, 205));
+		
 		
 		// 버튼 연결 필요
 		JButton btnNewButton_1 = new JButton("\uB3CC\uC544\uAC00\uAE30");
 		
 		// 수정
-		JLabel lblMan = new JLabel("male");
+		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
+		int a = 0;
+		int b = 0;
+		try{
+			a = (Integer.parseInt(lm.ColumnMale)*100 / sum);
+			b = (Integer.parseInt(lm.ColumnFemale)*100 / sum);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		JLabel lblMan = new JLabel("male: "+a+"%");
+		lblMan.setFont(new Font("굴림", Font.PLAIN, 20));
 		
 		// 수정
-		JLabel lblFemale = new JLabel("female");
+		JLabel lblFemale = new JLabel("female: "+b+"%");
+		lblFemale.setFont(new Font("굴림", Font.PLAIN, 20));
 		
 		// URL, 신문사, 날짜
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
+		textField_1.setText(lm.ColumnURL+"                    "+lm.ColumnPname+"                    "+lm.ColumnDate);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel.setText("Views: "+lm.ColumnViews);
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 1112, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 579, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblFemale, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textField_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-								.addComponent(textTitle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-								.addComponent(textField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))))
-					.addGap(10))
+								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 1112, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+											.addComponent(lblFemale, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(lblMan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(textField_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+										.addComponent(textTitle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+										.addComponent(textField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+										.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))))
+							.addGap(10))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -190,24 +223,33 @@ public class ArticleViewPage {
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(10)
-							.addComponent(lblMan)
+							.addComponent(lblMan, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblFemale))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(10)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
-					.addGap(10))
+							.addComponent(lblFemale, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel))
 		);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{489, 134, 0};
+		gbl_panel_1.rowHeights = new int[]{28, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
 		
 		
 	
 		lblNewsbade = new JLabel("NewsBada");
-		lblNewsbade.setFont(new Font("인터파크고딕 M", Font.PLAIN, 27));
-		panel_1.add(lblNewsbade);
+		lblNewsbade.setFont(new Font("굴림", Font.PLAIN, 27));
+		GridBagConstraints gbc_lblNewsbade = new GridBagConstraints();
+		gbc_lblNewsbade.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblNewsbade.gridx = 1;
+		gbc_lblNewsbade.gridy = 1;
+		panel_1.add(lblNewsbade, gbc_lblNewsbade);
 		frame.getContentPane().setLayout(groupLayout);
 		
 		
@@ -237,7 +279,7 @@ class loadingMysql {
 	public static String ColumnDate = new String();
 	public static String ColumnTitle = new String();
 	public static String ColumnText = new String();
-	public static String ColumnImage = new String();
+	public static byte[] ColumnImage;
 	
 	public loadingMysql (int i) throws Exception {
 		// 1.  드라이버 로드
@@ -296,11 +338,11 @@ class loadingMysql {
 				ColumnDate = rs1.getString("Date");
 				ColumnTitle = rs1.getString("A_title");
 				ColumnText = rs1.getString("A_text");
-				ColumnImage = rs1.getString("A_img");
+				ColumnImage = rs1.getBytes("A_img");
 					
 				System.out.println("P_name: "+ColumnDate);
 				System.out.println("Views: "+ColumnTitle);
-				System.out.println("Male: "+ColumnText);
+				System.out.println("text: "+ColumnText);
 				//System.out.println("Female: "+ColumnImage);
 				}
 			
