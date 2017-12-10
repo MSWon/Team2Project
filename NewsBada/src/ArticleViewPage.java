@@ -38,6 +38,7 @@ import java.awt.GridBagConstraints;
 public class ArticleViewPage {
 	
 	private static int ColumnID; 
+	private static String ColumnTheme;
 
 	private JFrame frame;
 	JPanel panel = new JPanel();
@@ -64,7 +65,7 @@ public class ArticleViewPage {
 					// 칼럼 번호를 삽입해야 하는 부분
 					int id =28;
 					// 칼럼 번호 삽입해야하는 부분
-					ArticleViewPage window = new ArticleViewPage(id);
+					ArticleViewPage window = new ArticleViewPage("정치",id);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,8 +77,9 @@ public class ArticleViewPage {
 	/**
 	 * Create the application.
 	 */
-	public ArticleViewPage(int columnID) {
+	public ArticleViewPage(String theme, int columnID) {
 		
+		this.ColumnTheme = theme;
 		// 칼럼 번호 입력 하는 부분
 		ArticleViewPage.ColumnID = columnID;
 		try {
@@ -101,11 +103,12 @@ public class ArticleViewPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnNewButton = new JButton();
-		ArticleImage path;
+		Article path;
+		int views = Integer.parseInt(lm.ColumnViews);
 		// Image File insert here!
 		
 		try {
-			path = new ArticleImage(lm.ColumnURL, lm.ColumnImage);
+			path = new Article(lm.ColumnURL, lm.ColumnImage, views);
 			
 			if (path != null) {
 				ImageIcon image = new ImageIcon(new ImageIcon(path.getImage()).getImage()
