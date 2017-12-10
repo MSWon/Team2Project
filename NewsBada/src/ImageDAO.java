@@ -9,32 +9,28 @@ import java.util.ArrayList;
 public class ImageDAO {
 	
     // MySQL 연결
-    String url = "jdbc:mysql://localhost:3306/newsbada";  //newsbada <- mysql에 있는 (내가 불러올) 스키마 이름
-    String user = "root"; 
-    String password = "1111";  // 자기꺼 비밀번호
+    static String url = "jdbc:mysql://localhost:3306/newsbada";  //newsbada <- mysql에 있는 (내가 불러올) 스키마 이름
+    static String user = "root"; 
+    static String password = "1111";  // 자기꺼 비밀번호
     
-	Connection myConn = null;
-	PreparedStatement myStmt = null;
+	static Connection myConn = null;
+	static PreparedStatement myStmt = null;
 	ResultSet rs = null;
 	
-	public ArrayList<ArticleImage> returnImage(String theme){
-		
-		ArrayList<ArticleImage> list = new ArrayList<ArticleImage>();
-
-
-		
-	    try {
+	public static ArrayList<Article> returnImage(String theme){
+		ArrayList<Article> list = new ArrayList<Article>();
+		try {
 	         // 1. Get connection
 	         myConn = DriverManager.getConnection(url, user, password);
 	         // 2. Create a statement
-	         myStmt = myConn.prepareStatement("SELECT A_img,A_title FROM url_info,article WHERE url_info.Url=article.Url AND theme = ?");
+	         myStmt = myConn.prepareStatement("SELECT A_img,A_title,Views FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Views DESC");
 	         
 	         myStmt.setString(1, theme);
 	         // 4. Execute SQL query
 	         ResultSet rs = myStmt.executeQuery();
-	         ArticleImage AI;
+	         Article AI;
 	         while(rs.next()){
-	        	 AI = new ArticleImage(rs.getString("A_title"),rs.getBytes("A_img"));
+	        	 AI = new Article(rs.getString("A_title"),rs.getBytes("A_img"),rs.getInt("Views"));
 	        	 list.add(AI);
 	         }
 	         rs.close();
@@ -49,6 +45,9 @@ public class ImageDAO {
 	   }
 	    
 		return list;
-  }
+      }	
+	}
+	
 
-}
+
+

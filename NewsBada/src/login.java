@@ -41,7 +41,7 @@ public class login extends JFrame implements ActionListener{
    PreparedStatement pstmt = null;
    ResultSet rs = null;
    int result;
-   static ArrayList<ArticleImage> list;
+   static ArrayList<Article> list;
    
    /**
     * Launch the application.

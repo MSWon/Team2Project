@@ -1,16 +1,26 @@
 import java.sql.Blob;
 import java.sql.Connection;
 
-public class ArticleImage {
+public class Article {
 	
 	
 
 	private String title;
 	private byte[] image;
+	private int view;
 
-	public ArticleImage(String Title,byte[] Image){
+	public int getView() {
+		return view;
+	}
+
+	public void setView(int view) {
+		this.view = view;
+	}
+
+	public Article(String Title,byte[] Image,int View){
 		this.title = Title;
 		this.image = Image;
+		this.view = View;
 	}
 
 	public byte[] getImage() {
@@ -27,7 +37,6 @@ public class ArticleImage {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	
 

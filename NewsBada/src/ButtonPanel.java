@@ -47,13 +47,15 @@ public class ButtonPanel extends JPanel implements ActionListener {
     
     private static final int IMG_WIDTH = 300;
     private static final int IMG_HEIGHT = 200;
-    ArrayList<ArticleImage> list;
+    ArrayList<Article> list;
     
     
    public ButtonPanel(String theme , int n) {
-      setBackground(Color.MAGENTA);
+      
+	  setBackground(Color.MAGENTA);
       Num = n;
-      list = login.list;
+      list = ImageDAO.returnImage(theme);
+
 
       
       JButton btnNewButton = new JButton(list.get(n-1).getTitle());

@@ -29,6 +29,7 @@ public class Main extends JFrame implements ActionListener{
    private JPanel contentPane;
    JPanel Btnpanel;
    JButton first,prev,next,last;
+   JButton btnNewButton,btnNewButton_1,btnNewButton_2,btnNewButton_3,btnNewButton_4,btnNewButton_5;
    CardLayout cl;
    CardPanel cp;
    String Theme;
@@ -60,12 +61,7 @@ public class Main extends JFrame implements ActionListener{
       cp = new CardPanel(theme,1);
       
 		Btnpanel = new JPanel(); // Button panel
-		
-		first = new JButton("  First");
-		first.setBackground(Color.WHITE);
-		first.setBorder(null);
-		first.addActionListener(this);
-		first.setFont(new Font("Gothic",Font.BOLD,25));
+
 		prev = new JButton("  Prev");
 		prev.addActionListener(this);
 		prev.setBackground(Color.WHITE);
@@ -76,16 +72,9 @@ public class Main extends JFrame implements ActionListener{
 		next.setBackground(Color.WHITE);
 		next.setBorder(null);
 		next.setFont(new Font("Gothic",Font.BOLD,25));
-		last = new JButton("  Last");
-		last.addActionListener(this);
-		last.setBackground(Color.WHITE);
-		last.setBorder(null);
-		last.setFont(new Font("Gothic",Font.BOLD,25));
-		
-		Btnpanel.add(first);
+
 		Btnpanel.add(prev);
 		Btnpanel.add(next);
-		Btnpanel.add(last);
 		Btnpanel.setBackground(Color.WHITE);
 		
 		panel_2.add(cp);
@@ -133,35 +122,42 @@ public class Main extends JFrame implements ActionListener{
       );
       panel.setLayout(gl_panel);
       
-      JButton btnNewButton = new JButton("\uC815\uCE58");
+      btnNewButton = new JButton("정치");
       btnNewButton.setBackground(new Color(255, 250, 250));
       btnNewButton.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton.addActionListener(this);
       panel_1.add(btnNewButton);
       
-      JButton btnNewButton_1 = new JButton("\uC0AC\uD68C");
+      btnNewButton_1 = new JButton("사회");
       btnNewButton_1.setBackground(new Color(255, 250, 250));
       btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton_1.addActionListener(this);
       panel_1.add(btnNewButton_1);
       
-      JButton btnNewButton_2 = new JButton("\uACBD\uC81C");
+      btnNewButton_2 = new JButton("경제");
       btnNewButton_2.setBackground(new Color(255, 250, 250));
       btnNewButton_2.setForeground(new Color(0, 0, 0));
       btnNewButton_2.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton_2.addActionListener(this);
       panel_1.add(btnNewButton_2);
-      
-      JButton btnNewButton_3 = new JButton("IT");
+
+      btnNewButton_3 = new JButton("IT");
       btnNewButton_3.setBackground(new Color(255, 250, 250));
       btnNewButton_3.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton_3.addActionListener(this);
       panel_1.add(btnNewButton_3);
       
-      JButton btnNewButton_4 = new JButton("\uBB38\uD654");
+      
+      btnNewButton_4 = new JButton("문화");
       btnNewButton_4.setBackground(new Color(255, 250, 250));
       btnNewButton_4.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton_4.addActionListener(this);
       panel_1.add(btnNewButton_4);
       
-      JButton btnNewButton_5 = new JButton("\uC5F0\uC608");
+      btnNewButton_5 = new JButton("연예");
       btnNewButton_5.setBackground(new Color(255, 250, 250));
       btnNewButton_5.setFont(new Font("굴림", Font.BOLD, 24));
+      btnNewButton_5.addActionListener(this);
       panel_1.add(btnNewButton_5);
       contentPane.setLayout(gl_contentPane);
       this.setVisible(true);
@@ -173,11 +169,7 @@ public class Main extends JFrame implements ActionListener{
 		JButton source = (JButton)e.getSource();
 		cl = (CardLayout) (cp.getLayout());
 		
-		if (e.getSource().equals(first)) {
-
-			cl.first(cp);
-
-		} else if (e.getSource().equals(prev)) {
+		if (e.getSource().equals(prev)) {
 
 			cl.previous(cp);
 
@@ -186,9 +178,24 @@ public class Main extends JFrame implements ActionListener{
 			cp.add(new Panel(Theme,k));
 			cl.next(cp);
 
-		} else if (e.getSource().equals(last)) {
-
-			cl.last(cp);
+		} else if(e.getSource().equals(btnNewButton)){
+			this.dispose();
+			new Main("정치");
+		} else if(e.getSource().equals(btnNewButton_1)){
+			this.dispose();
+			new Main("사회");
+		} else if(e.getSource().equals(btnNewButton_2)){
+			this.dispose();
+			new Main("경제");
+		}else if(e.getSource().equals(btnNewButton_3)){
+			this.dispose();
+			new Main("IT");
+		}else if(e.getSource().equals(btnNewButton_4)){
+			this.dispose();
+			new Main("문화");
+		}else if(e.getSource().equals(btnNewButton_5)){
+			this.dispose();
+			new Main("연예");
 		}
 	
 }
