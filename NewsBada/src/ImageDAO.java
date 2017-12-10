@@ -23,14 +23,14 @@ public class ImageDAO {
 	         // 1. Get connection
 	         myConn = DriverManager.getConnection(url, user, password);
 	         // 2. Create a statement
-	         myStmt = myConn.prepareStatement("SELECT A_img,A_title,Views FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Views DESC");
+	         myStmt = myConn.prepareStatement("SELECT A_img,A_title,Views,A_Number FROM url_info,article WHERE url_info.Url=article.Url AND theme = ? ORDER BY Views DESC");
 	         
 	         myStmt.setString(1, theme);
 	         // 4. Execute SQL query
 	         ResultSet rs = myStmt.executeQuery();
 	         Article AI;
 	         while(rs.next()){
-	        	 AI = new Article(rs.getString("A_title"),rs.getBytes("A_img"),rs.getInt("Views"));
+	        	 AI = new Article(rs.getString("A_title"),rs.getBytes("A_img"),rs.getInt("Views"),rs.getInt("A_Number"));
 	        	 list.add(AI);
 	         }
 	         rs.close();

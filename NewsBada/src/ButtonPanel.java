@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
@@ -88,7 +90,24 @@ public class ButtonPanel extends JPanel implements ActionListener {
    @Override
    public void actionPerformed(ActionEvent arg0) {
       
-      new ArticleViewPage(Theme,Num);
+	   try {
+	         // 1. Get connection
+	         myConn = DriverManager.getConnection(url, user, password);
+	         // 2. Create a statement
+	         myStmt = myConn.prepareStatement("INSERT INTO read_on (`Time`, `ID`, `A_Number`) VALUES (?, ?, ?)");
+	         User u = new User();
+	         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms:ms").format(Calendar.getInstance().getTime());
+	         myStmt.setString(1, date);
+	         myStmt.setString(2, u.getId());
+	         myStmt.setInt(3, list.get(Num-1).getA_number());
+	         // 4. Execute SQL query
+	         myStmt.executeUpdate();
+	         
+	   } catch (Exception exc) {
+	         exc.printStackTrace();
+	   }
+	   System.out.println("µÆ´Ù.");
+//    new ArticleViewPage(Theme,Num);
       
    }
 

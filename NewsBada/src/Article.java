@@ -6,8 +6,18 @@ public class Article {
 	
 
 	private String title;
+	private int a_number;
 	private byte[] image;
 	private int view;
+	
+	public int getA_number() {
+		return a_number;
+	}
+
+	public void setA_number(int a_number) {
+		this.a_number = a_number;
+	}
+
 
 	public int getView() {
 		return view;
@@ -17,10 +27,11 @@ public class Article {
 		this.view = view;
 	}
 
-	public Article(String Title,byte[] Image,int View){
+	public Article(String Title,byte[] Image,int View,int A_Number){
 		this.title = Title;
 		this.image = Image;
 		this.view = View;
+		this.a_number = A_Number;
 	}
 
 	public byte[] getImage() {

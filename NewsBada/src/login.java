@@ -181,6 +181,8 @@ public class login extends JFrame implements ActionListener{
 //    	   to main
     	   if(result == 1){
                this.dispose();
+               User user = new User();
+               user.setId(id);
                Main m = new Main("Á¤Ä¡");
             }
     	   else {
