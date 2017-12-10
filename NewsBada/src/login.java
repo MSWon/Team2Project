@@ -21,6 +21,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class login extends JFrame implements ActionListener{
 
@@ -40,6 +41,7 @@ public class login extends JFrame implements ActionListener{
    PreparedStatement pstmt = null;
    ResultSet rs = null;
    int result;
+   static ArrayList<ArticleImage> list;
    
    /**
     * Launch the application.
@@ -61,6 +63,12 @@ public class login extends JFrame implements ActionListener{
     * Create the frame.
     */
    public login() {
+	   
+	   
+	   
+	  ImageDAO dao = new ImageDAO();
+	  list = dao.returnImage("정치");
+	     	   
 	  setResizable(false);
       setTitle("\uB85C\uADF8\uC778");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,7 +170,7 @@ public class login extends JFrame implements ActionListener{
 //    	   to main
     	   if(result == 1){
                this.dispose();
-               Main m = new Main();
+               Main m = new Main("정치");
             }
     	   else {
                JOptionPane.showMessageDialog(login.this, "아이디 또는 비밀번호가 일치하지 않습니다.");

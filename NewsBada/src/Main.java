@@ -31,27 +31,16 @@ public class Main extends JFrame implements ActionListener{
    JButton first,prev,next,last;
    CardLayout cl;
    CardPanel cp;
+   String Theme;
+   int k= 1;
    /**
-    * Launch the application.
-    */
-   public static void main(String[] args) {
-      EventQueue.invokeLater(new Runnable() {
-         public void run() {
-            try {
-               Main frame = new Main();
-               frame.setVisible(true);
-            } catch (Exception e) {
-               e.printStackTrace();
-            }
-         }
-      });
-   }
 
    /**
     * Create the frame.
     */
-   public Main() {
-	   
+   public Main(String theme) {
+	  
+	   Theme = theme;
    	setResizable(false);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
@@ -68,8 +57,7 @@ public class Main extends JFrame implements ActionListener{
       
       JPanel panel_2 = new JPanel();
       panel_2.setLayout(new BoxLayout(panel_2,BoxLayout.Y_AXIS));
-      cp = new CardPanel("Á¤Ä¡",6);
-
+      cp = new CardPanel(theme,1);
       
 		Btnpanel = new JPanel(); // Button panel
 		
@@ -171,7 +159,8 @@ public class Main extends JFrame implements ActionListener{
 			cl.previous(cp);
 
 		} else if (e.getSource().equals(next)) {
-
+			k++;
+			cp.add(new Panel(Theme,k));
 			cl.next(cp);
 
 		} else if (e.getSource().equals(last)) {
