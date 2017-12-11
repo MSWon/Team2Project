@@ -111,13 +111,39 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	   }
 	   try{
 	         myConn = DriverManager.getConnection(url, user, password);
-	         myStmt2 = myConn.prepareStatement("UPDATE newsbada.article SET Views=Views+1 WHERE A_Number=?");
+	         myStmt = myConn.prepareStatement("UPDATE newsbada.article SET Views=Views+1 WHERE A_Number=?");
 	         User u = new User();
-	         myStmt2.setInt(1,list.get(Num).getA_number());
-	         myStmt2.executeUpdate();
+	         myStmt.setInt(1,list.get(Num).getA_number());
+	         myStmt.executeUpdate();
 	      }catch(Exception exc){
 	         exc.printStackTrace();
 	      }
+	   try{
+	         myConn = DriverManager.getConnection(url, user, password);
+	         myStmt = myConn.prepareStatement("SET @male = (SELECT COUNT(DISTINCT user.id) "
+	         		+ "FROM article,read_on,user "
+	         		+ "WHERE read_on.id = user.id AND "
+	         		+ "read_on.A_Number = article.A_Number AND "
+	         		+ "article.A_Number = ? AND user.sex = '³²')");
+	         myStmt.setInt(1, list.get(Num).getA_number());
+	         myStmt.executeUpdate();
+	         myStmt = myConn.prepareStatement("UPDATE article SET male = @male WHERE A_Number=?");
+	         myStmt.setInt(1, list.get(Num).getA_number());	
+	         myStmt.executeUpdate();
+	         myStmt = myConn.prepareStatement("SET @female = (SELECT COUNT(DISTINCT user.id) "
+	         		+ "FROM article,read_on,user "
+	         		+ "WHERE read_on.id = user.id AND "
+	         		+ "read_on.A_Number = article.A_Number AND "
+	         		+ "article.A_Number = ? AND user.sex = '¿©')");
+	         myStmt.setInt(1, list.get(Num).getA_number());	
+	         myStmt.executeUpdate();
+	         myStmt = myConn.prepareStatement("UPDATE article SET female = @female WHERE A_Number=?");
+	         myStmt.setInt(1, list.get(Num).getA_number());
+	         myStmt.executeUpdate();
+	      }catch(Exception exc){
+	         exc.printStackTrace();
+	      }
+	 
 	 
 	  
 	   num = list.get(Num).getA_number();

@@ -187,22 +187,27 @@ public class ArticleViewPage {
 		panel_1.setBackground(SystemColor.textHighlight);
 		
 //		// ¼öÁ¤
-//		int sum = Integer.parseInt(lm.ColumnFemale) + Integer.parseInt(lm.ColumnMale);
-		int a = 0;
-		int b = 0;
-//		try{
-//			a = (Integer.parseInt(lm.ColumnMale)*100 / sum);
-//			b = (Integer.parseInt(lm.ColumnFemale)*100 / sum);
-//		}
-//		catch (Exception e){
-//			e.printStackTrace();
-//		}
-		JLabel lblMan = new JLabel("male: "+a+"%");
-		lblMan.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		int sum = ColumnFemale + ColumnMale;
+		int a;
+		int b;
+		if(sum == 0){
+			a = 0;
+			b = 0;
+		}
+
+		else{
+			a = ColumnMale*100 / sum;
+			b = ColumnFemale*100 / sum;
+		}
+
+		JLabel lblMan = new JLabel("³²ÀÚ: "+a + "%");
+		lblMan.setForeground(Color.BLUE);
+		lblMan.setFont(new Font("±¼¸²", Font.BOLD, 22));
 		
 		// ¼öÁ¤
-		JLabel lblFemale = new JLabel("female: "+b+"%");
-		lblFemale.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		JLabel lblFemale = new JLabel("¿©ÀÚ: "+b + "%");
+		lblFemale.setForeground(Color.RED);
+		lblFemale.setFont(new Font("±¼¸²", Font.BOLD, 22));
 		
 		// URL, ½Å¹®»ç, ³¯Â¥
 		textField_1 = new JTextField();
@@ -213,7 +218,7 @@ public class ArticleViewPage {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 20));
-		lblNewLabel.setText("Views: "+ ColumnViews);
+		lblNewLabel.setText("\uC870\uD68C\uC218: "+ColumnViews);
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
