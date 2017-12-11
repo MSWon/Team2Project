@@ -27,6 +27,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.Action;
 import java.awt.Font;
@@ -48,7 +50,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     int Num;
     String Theme;
     String Title;
-    
+    JButton btnNewButton;
     private static final int IMG_WIDTH = 300;
     private static final int IMG_HEIGHT = 200;
     ArrayList<Article> list;
@@ -63,7 +65,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
       list = dao.returnImage(theme);
       
       
-      JButton btnNewButton = new JButton(list.get(n).getTitle());
+      btnNewButton = new JButton(list.get(n).getTitle());
       btnNewButton.setVerticalTextPosition(SwingConstants.BOTTOM);
       btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
       btnNewButton.setBackground(Color.WHITE);
@@ -85,8 +87,11 @@ public class ButtonPanel extends JPanel implements ActionListener {
       		.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 187, Short.MAX_VALUE)
       );
       setLayout(groupLayout);
+      
 
    }
+   
+   
 
    @Override
    public void actionPerformed(ActionEvent arg0) {
@@ -147,7 +152,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	 
 	  
 	   num = list.get(Num).getA_number();
-       new ArticleViewPage(Theme,num);
+	   
+       new ArticleViewPage(btnNewButton,Theme,num);
+       btnNewButton.setEnabled(false);;
        
       
    }

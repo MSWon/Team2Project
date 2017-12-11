@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.awt.SystemColor;
 
 public class EmployeeSearchApp extends JFrame {
 
@@ -52,19 +53,22 @@ public class EmployeeSearchApp extends JFrame {
 		}
 		
 		setTitle("Search App");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 545, 393);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.text);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+		this.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.textHighlight);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
 		JLabel lblEnterLastName = new JLabel("Enter the Title");
+		lblEnterLastName.setForeground(SystemColor.text);
 		lblEnterLastName.setFont(new Font("±¼¸²", Font.BOLD, 18));
 		panel.add(lblEnterLastName);
 		
@@ -73,6 +77,7 @@ public class EmployeeSearchApp extends JFrame {
 		lastNameTextField.setColumns(15);
 		
 		btnSearch = new JButton("Search");
+		btnSearch.setBackground(SystemColor.text);
 		btnSearch.setFont(new Font("±¼¸²", Font.BOLD, 17));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

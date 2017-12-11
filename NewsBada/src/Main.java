@@ -28,13 +28,14 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 
 public class Main extends JFrame implements ActionListener{
 
    private JPanel contentPane;
    JPanel Btnpanel;
    JButton first,prev,next,last;
-   JButton btnNewButton,btnNewButton_1,btnNewButton_2,btnNewButton_3,btnNewButton_4,btnNewButton_5;
+   JButton btnNewButton,btnNewButton_1,btnNewButton_2,btnNewButton_3,btnNewButton_4,btnNewButton_5,btnNewButton_7;
    CardLayout cl;
    CardPanel cp;
    String Theme;
@@ -65,15 +66,15 @@ public class Main extends JFrame implements ActionListener{
       JPanel panel_2 = new JPanel();
       panel_2.setLayout(new BoxLayout(panel_2,BoxLayout.Y_AXIS));
       cp = new CardPanel(theme,0);
-      
+      this.setLocationRelativeTo(null);
 		Btnpanel = new JPanel(); // Button panel
 
-		prev = new JButton("  Prev");
+		prev = new JButton("  이전");
 		prev.addActionListener(this);
 		prev.setBackground(Color.WHITE);
 		prev.setBorder(null);
 		prev.setFont(new Font("Gothic",Font.BOLD,25));
-		next = new JButton("  Next");
+		next = new JButton("  다음");
 		next.addActionListener(this);
 		next.setBackground(Color.WHITE);
 		next.setBorder(null);
@@ -105,7 +106,12 @@ public class Main extends JFrame implements ActionListener{
       				.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)))
       );
       
-      JButton btnNewButton_6 = new JButton("Search");
+      JLabel lblNewLabel = new JLabel("NewsBada");
+      lblNewLabel.setForeground(new Color(255, 255, 255));
+      lblNewLabel.setFont(new Font("HY목각파임B", Font.BOLD, 55));
+      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+      
+      JButton btnNewButton_6 = new JButton("\uAC80\uC0C9");
       btnNewButton_6.addActionListener(new ActionListener() {
       	public void actionPerformed(ActionEvent e) {
       		new EmployeeSearchApp();
@@ -114,25 +120,33 @@ public class Main extends JFrame implements ActionListener{
       btnNewButton_6.setBackground(Color.WHITE);
       btnNewButton_6.setFont(new Font("굴림", Font.BOLD, 17));
       
-      JLabel lblNewLabel = new JLabel("NewsBada");
-      lblNewLabel.setForeground(new Color(255, 255, 255));
-      lblNewLabel.setFont(new Font("HY목각파임B", Font.BOLD, 55));
-      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+      btnNewButton_7 = new JButton("\uB85C\uADF8\uC544\uC6C3");
+      btnNewButton_7.setFont(new Font("굴림", Font.BOLD, 17));
+      btnNewButton_7.setForeground(SystemColor.desktop);
+      btnNewButton_7.setBackground(SystemColor.textHighlightText);
+      btnNewButton_7.addActionListener(this);
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
       			.addGap(702)
       			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE))
-      		.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
+      		.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+      			.addContainerGap(1567, Short.MAX_VALUE)
+      			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+      			.addPreferredGap(ComponentPlacement.RELATED)
+      			.addComponent(btnNewButton_7)
+      			.addGap(4))
       );
       gl_panel.setVerticalGroup(
       	gl_panel.createParallelGroup(Alignment.LEADING)
       		.addGroup(gl_panel.createSequentialGroup()
       			.addGap(49)
       			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-      			.addGap(22)
-      			.addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+      			.addGap(21)
+      			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(btnNewButton_7, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+      				.addComponent(btnNewButton_6, GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)))
       );
       panel.setLayout(gl_panel);
       
@@ -210,7 +224,10 @@ public class Main extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(btnNewButton_5)){
 			this.dispose();
 			new Main("연예");
+		}else if(e.getSource().equals(btnNewButton_7)){
+			this.dispose();
+			new login();
 		}
-	
+		
 }
 }

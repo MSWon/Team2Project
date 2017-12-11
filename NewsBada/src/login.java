@@ -80,7 +80,7 @@ public class login extends JFrame implements ActionListener{
       contentPane.setBackground(new Color(153, 204, 255));
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
-      
+      this.setLocationRelativeTo(null);
       JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514 :");
       lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 25));
       

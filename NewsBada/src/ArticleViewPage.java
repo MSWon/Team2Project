@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -37,6 +39,7 @@ import java.awt.Desktop;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.SystemColor;
@@ -63,7 +66,7 @@ public class ArticleViewPage {
 	static int ColumnMale ;
 	static int ColumnFemale;
 	int ColumnA_number;
-	
+	JButton caller;
 	// url_info 테이블 정보 불러오기
 	String ColumnDate;
 	String ColumnTitle;
@@ -83,7 +86,9 @@ public class ArticleViewPage {
 	/**
 	 * Create the application.
 	 */
-	public ArticleViewPage(String theme, int n) {
+	public ArticleViewPage(JButton caller_input,String theme, int n) {
+		
+		caller = caller_input;
 		
 		
 		try {
@@ -121,8 +126,52 @@ public class ArticleViewPage {
 		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(SystemColor.text);
-		frame.setLocation(150, 100);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setResizable(false);
+	     frame.addWindowListener(new WindowListener() {
+				
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowClosing(WindowEvent e) {
+					caller.setEnabled(true);
+					
+				}
+				
+				@Override
+				public void windowClosed(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		
 		JButton btnNewButton = new JButton();
 		btnNewButton.addActionListener(new ActionListener() {
@@ -287,6 +336,7 @@ public class ArticleViewPage {
 		
 		// 추가 메뉴 삽입
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
 	}

@@ -29,6 +29,7 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.SystemColor;
 
 public class Signup extends JFrame implements ActionListener {
 
@@ -51,7 +52,7 @@ public class Signup extends JFrame implements ActionListener {
    ButtonGroup buttonGroup = new ButtonGroup();
    JRadioButton rdbtnNewRadioButton;
    JRadioButton radioButton;
-   JButton btnNewButton;
+   JButton btnNewButton,btnNewButton_1;
    private JPasswordField passwordField;
    Connection myConn = null;
    PreparedStatement myStmt = null;
@@ -82,133 +83,137 @@ public class Signup extends JFrame implements ActionListener {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 596, 444);
       contentPane = new JPanel();
-      contentPane.setBackground(Color.WHITE);
+      contentPane.setBackground(new Color(153, 204, 255));
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
-
+      this.setLocationRelativeTo(null);
       JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514(\uC601\uBB38) :");
+      lblNewLabel.setForeground(SystemColor.desktop);
       lblNewLabel.setFont(new Font("±º∏≤√º", Font.BOLD, 25));
       lblNewLabel.setBackground(Color.WHITE);
 
       JLabel lblPassword = new JLabel("\uBE44\uBC00\uBC88\uD638 :");
+      lblPassword.setForeground(SystemColor.desktop);
       lblPassword.setFont(new Font("±º∏≤√º", Font.BOLD, 25));
       lblPassword.setBackground(Color.WHITE);
 
       textField = new JTextField();
+      textField.setFont(new Font("±º∏≤", Font.PLAIN, 25));
       textField.setColumns(10);
       textField.addActionListener(this);
 
       lblSex = new JLabel("\uC131\uBCC4 :");
+      lblSex.setForeground(SystemColor.desktop);
       lblSex.setFont(new Font("±º∏≤√º", Font.BOLD, 25));
       lblSex.setBackground(Color.WHITE);
 
       label = new JLabel("\uB098\uC774 :");
+      label.setForeground(SystemColor.desktop);
       label.setFont(new Font("±º∏≤√º", Font.BOLD, 25));
       label.setBackground(Color.WHITE);
 
       textField_2 = new JTextField();
+      textField_2.setFont(new Font("±º∏≤", Font.PLAIN, 25));
       textField_2.setColumns(10);
       textField_2.addActionListener(this);
 
       label_1 = new JLabel("\uC138");
+      label_1.setForeground(SystemColor.desktop);
       label_1.setFont(new Font("±º∏≤√º", Font.BOLD, 25));
       label_1.setBackground(Color.WHITE);
 
       rdbtnNewRadioButton = new JRadioButton("\uB0A8");
+      rdbtnNewRadioButton.setForeground(SystemColor.desktop);
       rdbtnNewRadioButton.addActionListener(this);
       buttonGroup.add(rdbtnNewRadioButton);
-      rdbtnNewRadioButton.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-      rdbtnNewRadioButton.setBackground(Color.WHITE);
+      rdbtnNewRadioButton.setFont(new Font("±º∏≤", Font.PLAIN, 25));
+      rdbtnNewRadioButton.setBackground(new Color(153, 204, 255));
 
       radioButton = new JRadioButton("\uC5EC");
+      radioButton.setForeground(SystemColor.desktop);
       radioButton.addActionListener(this);
       buttonGroup.add(radioButton);
-      radioButton.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-      radioButton.setBackground(Color.WHITE);
+      radioButton.setFont(new Font("±º∏≤", Font.PLAIN, 25));
+      radioButton.setBackground(new Color(153, 204, 255));
 
-      btnNewButton = new JButton("submit");
+      btnNewButton = new JButton("\uAC00\uC785");
+      btnNewButton.setBackground(SystemColor.text);
       btnNewButton.addActionListener(this);
-      btnNewButton.setFont(new Font("±º∏≤", Font.BOLD, 18));
+      btnNewButton.setFont(new Font("±º∏≤", Font.BOLD, 20));
 
       passwordField = new JPasswordField();
+      passwordField.setFont(new Font("±º∏≤", Font.PLAIN, 25));
       passwordField.addActionListener(this);
+      
+       btnNewButton_1 = new JButton("\uBA54\uC778");
+       btnNewButton_1.addActionListener(this);
+      btnNewButton_1.setBackground(SystemColor.text);
+      btnNewButton_1.setFont(new Font("±º∏≤", Font.BOLD, 20));
       GroupLayout gl_contentPane = new GroupLayout(contentPane);
-      gl_contentPane
-            .setHorizontalGroup(
-                  gl_contentPane.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_contentPane.createSequentialGroup().addGap(167).addComponent(btnNewButton)
-                              .addContainerGap())
-                        .addGroup(
-                              Alignment.LEADING, gl_contentPane
-                                    .createSequentialGroup().addGap(111).addGroup(gl_contentPane
-                                          .createParallelGroup(
-                                                Alignment.LEADING)
-                                          .addGroup(gl_contentPane.createSequentialGroup()
-                                                .addComponent(label, GroupLayout.PREFERRED_SIZE, 100,
-                                                      GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                .addComponent(textField_2, GroupLayout.PREFERRED_SIZE,
-                                                      60, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 100,
-                                                      GroupLayout.PREFERRED_SIZE))
-                                          .addGroup(gl_contentPane.createSequentialGroup()
-                                                .addGroup(gl_contentPane
-                                                      .createParallelGroup(Alignment.LEADING, false)
-                                                      .addGroup(gl_contentPane.createSequentialGroup()
-                                                            .addComponent(lblSex,
-                                                                  GroupLayout.PREFERRED_SIZE, 100,
-                                                                  GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(
-                                                                  ComponentPlacement.RELATED)
-                                                            .addComponent(rdbtnNewRadioButton)
-                                                            .addGap(52).addComponent(radioButton,
-                                                                  GroupLayout.PREFERRED_SIZE, 47,
-                                                                  GroupLayout.PREFERRED_SIZE))
-                                                      .addGroup(gl_contentPane.createSequentialGroup()
-                                                            .addGroup(gl_contentPane
-                                                                  .createParallelGroup(
-                                                                        Alignment.LEADING)
-                                                                  .addComponent(lblNewLabel)
-                                                                  .addComponent(lblPassword,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        149,
-                                                                        GroupLayout.PREFERRED_SIZE))
-                                                            .addPreferredGap(
-                                                                  ComponentPlacement.UNRELATED)
-                                                            .addGroup(gl_contentPane
-                                                                  .createParallelGroup(
-                                                                        Alignment.TRAILING,
-                                                                        false)
-                                                                  .addComponent(passwordField)
-                                                                  .addComponent(textField,
-                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                        166, Short.MAX_VALUE))))
-                                                .addGap(14)))
-                                    .addContainerGap(96, Short.MAX_VALUE)));
-      gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-            Alignment.TRAILING,
-            gl_contentPane.createSequentialGroup().addContainerGap(74, Short.MAX_VALUE).addGroup(gl_contentPane
-                  .createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
-                  .addGroup(gl_contentPane.createSequentialGroup().addGap(6).addComponent(textField,
-                        GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                  .addGap(39)
-                  .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-                        .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE))
-                  .addGap(36)
-                  .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(lblSex, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdbtnNewRadioButton)
-                        .addComponent(radioButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-                  .addGap(30)
-                  .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(label, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                              GroupLayout.PREFERRED_SIZE)
-                        .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                  .addGap(44).addComponent(btnNewButton).addContainerGap()));
+      gl_contentPane.setHorizontalGroup(
+      	gl_contentPane.createParallelGroup(Alignment.LEADING)
+      		.addGroup(gl_contentPane.createSequentialGroup()
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+      				.addGroup(gl_contentPane.createSequentialGroup()
+      					.addGap(397)
+      					.addComponent(btnNewButton)
+      					.addPreferredGap(ComponentPlacement.RELATED)
+      					.addComponent(btnNewButton_1))
+      				.addGroup(gl_contentPane.createSequentialGroup()
+      					.addGap(100)
+      					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+      						.addGroup(gl_contentPane.createSequentialGroup()
+      							.addComponent(label, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+      							.addPreferredGap(ComponentPlacement.RELATED)
+      							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+      							.addPreferredGap(ComponentPlacement.UNRELATED)
+      							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+      						.addGroup(gl_contentPane.createSequentialGroup()
+      							.addComponent(lblSex, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+      							.addPreferredGap(ComponentPlacement.RELATED)
+      							.addComponent(rdbtnNewRadioButton)
+      							.addGap(52)
+      							.addComponent(radioButton))
+      						.addGroup(gl_contentPane.createSequentialGroup()
+      							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+      								.addGroup(gl_contentPane.createSequentialGroup()
+      									.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+      									.addGap(46))
+      								.addGroup(gl_contentPane.createSequentialGroup()
+      									.addComponent(lblNewLabel)
+      									.addPreferredGap(ComponentPlacement.UNRELATED)))
+      							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+      								.addComponent(passwordField)
+      								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))))))
+      			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      );
+      gl_contentPane.setVerticalGroup(
+      	gl_contentPane.createParallelGroup(Alignment.TRAILING)
+      		.addGroup(gl_contentPane.createSequentialGroup()
+      			.addContainerGap(62, Short.MAX_VALUE)
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(lblNewLabel))
+      			.addGap(39)
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+      				.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+      			.addGap(36)
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(lblSex, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(rdbtnNewRadioButton)
+      				.addComponent(radioButton, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+      			.addGap(30)
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+      				.addComponent(label, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+      				.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+      			.addGap(28)
+      			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+      				.addComponent(btnNewButton_1)
+      				.addComponent(btnNewButton))
+      			.addContainerGap())
+      );
       contentPane.setLayout(gl_contentPane);
    this.setVisible(true);
    }
@@ -256,6 +261,7 @@ public class Signup extends JFrame implements ActionListener {
                
                if(result == 1){
                   JOptionPane.showMessageDialog(Signup.this, "¡ﬂ∫πµ» æ∆¿Ãµ¿‘¥œ¥Ÿ.");
+           
                }
                
                else{
@@ -279,13 +285,19 @@ public class Signup extends JFrame implements ActionListener {
          
                      catch (Exception exc) {
                         exc.printStackTrace();
-                     }          
+                     }     
+                     this.dispose();
+                     new login();
                 }
+           
              }
          //
-         this.dispose();
-         new login();
+
          
         }
+      else if(source == btnNewButton_1){
+    	  this.dispose();
+    	  new login();
+      }
     }
 }
