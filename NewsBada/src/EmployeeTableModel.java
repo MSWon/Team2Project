@@ -8,7 +8,7 @@ class EmployeeTableModel extends AbstractTableModel {
 	private static final int LAST_NAME_COL = 0;
 	private static final int FIRST_NAME_COL = 1;
 
-	private String[] columnNames = { "Title", "Url"};
+	private String[] columnNames = { "Title", "Url","Views"};
 	private List<Employee> employees;
 
 	public EmployeeTableModel(List<Employee> theEmployees) {
@@ -40,6 +40,8 @@ class EmployeeTableModel extends AbstractTableModel {
 			return tempEmployee.getA_title();
 		case FIRST_NAME_COL:
 			return tempEmployee.getUrl();
+		case 2:
+			return tempEmployee.getViews();
 		default:
 			return tempEmployee.getA_title();
 		}

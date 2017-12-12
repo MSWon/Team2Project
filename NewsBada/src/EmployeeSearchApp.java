@@ -67,7 +67,7 @@ public class EmployeeSearchApp extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblEnterLastName = new JLabel("Enter the Title");
+		JLabel lblEnterLastName = new JLabel("키워드 입력");
 		lblEnterLastName.setForeground(SystemColor.text);
 		lblEnterLastName.setFont(new Font("굴림", Font.BOLD, 18));
 		panel.add(lblEnterLastName);
@@ -76,7 +76,7 @@ public class EmployeeSearchApp extends JFrame {
 		panel.add(lastNameTextField);
 		lastNameTextField.setColumns(15);
 		
-		btnSearch = new JButton("Search");
+		btnSearch = new JButton("검색");
 		btnSearch.setBackground(SystemColor.text);
 		btnSearch.setFont(new Font("굴림", Font.BOLD, 17));
 		btnSearch.addActionListener(new ActionListener() {

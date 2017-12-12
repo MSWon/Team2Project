@@ -10,11 +10,13 @@ public class Employee {
 
 	private String A_title;
 	private String Url;
+	private int Views;
 	
-	public Employee(String A_title, String Url) {
+	public Employee(String A_title, String Url,int Views) {
 		super();
 		this.A_title = A_title;
 		this.Url = Url;
+		this.Views = Views;
 	}
 
 
@@ -46,7 +48,19 @@ public class Employee {
 	@Override
 	public String toString() {
 		return String
-				.format("Employee [A_title=%s, Url=%s]",A_title, Url);
+				.format("Employee [A_title=%s, Url=%s, Views=%s]",A_title, Url,Views);
+	}
+
+
+
+	public int getViews() {
+		return Views;
+	}
+
+
+
+	public void setViews(int views) {
+		Views = views;
 	}
 	
 	

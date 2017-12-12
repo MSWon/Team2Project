@@ -30,7 +30,7 @@ public class EmployeeDAO {
 		
 		try {
 			myStmt = myConn.createStatement();
-			myRs = myStmt.executeQuery("select * from url_info");
+			myRs = myStmt.executeQuery("select A_title,Views,article.Url from url_info,article where url_info.Url=article.Url ORDER BY Views DESC");
 			
 			while (myRs.next()) {
 				Employee tempEmployee = convertRowToEmployee(myRs);
@@ -52,7 +52,7 @@ public class EmployeeDAO {
 
 		try {
 			A_title = '%'+A_title+'%';
-			myStmt = myConn.prepareStatement("select A_title,article.Url from url_info,article where url_info.Url=article.Url AND A_title like ? ORDER BY Views DESC");
+			myStmt = myConn.prepareStatement("select A_title,Views,article.Url from url_info,article where url_info.Url=article.Url AND A_title like ? ORDER BY Views DESC");
 			
 			myStmt.setString(1, A_title);
 			
@@ -74,8 +74,9 @@ public class EmployeeDAO {
 		
 		String A_title = myRs.getString("A_Title");
 		String Url = myRs.getString("Url");
+		int Views = myRs.getInt("Views");
 		
-		Employee tempEmployee = new Employee(A_title,Url);
+		Employee tempEmployee = new Employee(A_title,Url,Views);
 		
 		return tempEmployee;
 	}
